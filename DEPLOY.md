@@ -9,8 +9,8 @@
 ### Setup
 ```bash
 # Clone the repo
-git clone https://github.com/AryanMedigeri08/Fifavp.git
-cd Fifavp
+git clone https://github.com/AryanMedigeri08/OnePitch.git
+cd OnePitch
 
 # Install dependencies
 npm install
@@ -42,12 +42,12 @@ The app will be available at `http://localhost:3000`.
 
 ### Steps
 1. Go to [vercel.com](https://vercel.com) and sign in with GitHub
-2. Click "Add New Project" → Import the `AryanMedigeri08/Fifavp` repo
+2. Click "Add New Project" → Import the `AryanMedigeri08/OnePitch` repo
 3. Framework Preset: **Next.js** (auto-detected)
 4. Set Environment Variables:
    - `GOOGLE_GENERATIVE_AI_API_KEY` → your Gemini API key
 5. Click "Deploy"
-6. Your live URL will be assigned (e.g., `fifavp.vercel.app`)
+6. Your live URL will be assigned (e.g., `onepitch.vercel.app`)
 
 ### Subsequent Deployments
 Every `git push` to the connected branch triggers an automatic deployment.
