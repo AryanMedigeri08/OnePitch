@@ -1,4 +1,4 @@
-import { google } from '@ai-sdk/google';
+import { getModelWithFallback } from '@/lib/agents/fallback-model';
 import { streamText, convertToModelMessages } from 'ai';
 import { getSystemPrompt } from '@/lib/agents/system-prompts';
 import type { AgentId } from '@/lib/agents/types';
@@ -29,7 +29,7 @@ CLOSED GATES: ${closedGates.length > 0 ? closedGates.join(', ') : 'None'}
     const systemPrompt = getSystemPrompt('compass' as AgentId, context);
 
     const result = streamText({
-      model: google(model),
+      model: getModelWithFallback(),
       system: systemPrompt,
       messages: await convertToModelMessages(messages),
     });

@@ -1,4 +1,4 @@
-import { google } from '@ai-sdk/google';
+import { getModelWithFallback } from '@/lib/agents/fallback-model';
 import { streamText, convertToModelMessages } from 'ai';
 import { getSystemPrompt } from '@/lib/agents/system-prompts';
 import volunteersData from '@/data/volunteers.json';
@@ -26,7 +26,7 @@ ALL VOLUNTEERS AT STADIUM: ${JSON.stringify(volunteersData.filter((v) => v.stadi
     const systemPrompt = getSystemPrompt('volunteeros', context);
 
     const result = streamText({
-      model: google(model),
+      model: getModelWithFallback(),
       system: systemPrompt,
       messages: await convertToModelMessages(messages),
     });

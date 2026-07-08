@@ -1,4 +1,4 @@
-import { google } from '@ai-sdk/google';
+import { getModelWithFallback } from '@/lib/agents/fallback-model';
 import { streamText, convertToModelMessages } from 'ai';
 import { getSystemPrompt } from '@/lib/agents/system-prompts';
 import { generateGateDensities, getIncidents } from '@/lib/mock-data-generator';
@@ -23,7 +23,7 @@ DENSITY THRESHOLDS: Green (<50%), Yellow (50-70%), Orange (70-85%), Red (>85%)
     const systemPrompt = getSystemPrompt('sentinel', context);
 
     const result = streamText({
-      model: google(model),
+      model: getModelWithFallback(),
       system: systemPrompt,
       messages: await convertToModelMessages(messages),
     });

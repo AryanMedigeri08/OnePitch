@@ -1,4 +1,4 @@
-import { google } from '@ai-sdk/google';
+import { getModelWithFallback } from '@/lib/agents/fallback-model';
 import { streamText, convertToModelMessages } from 'ai';
 import { getSystemPrompt } from '@/lib/agents/system-prompts';
 import fansData from '@/data/fans.json';
@@ -29,11 +29,10 @@ AVAILABLE VOLUNTEERS: ${JSON.stringify(volunteers.filter((v) => v.status === 'av
       context += `\nMODE: GENERATE MATCH-DAY PLAN — Create a personalized, detailed match-day accessibility plan.`;
     }
 
-    const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
     const systemPrompt = getSystemPrompt('accessall', context);
 
     const result = streamText({
-      model: google(model),
+      model: getModelWithFallback(),
       system: systemPrompt,
       messages: await convertToModelMessages(messages),
     });

@@ -1,4 +1,4 @@
-import { google } from '@ai-sdk/google';
+import { getModelWithFallback } from '@/lib/agents/fallback-model';
 import { streamText, convertToModelMessages } from 'ai';
 import { getSystemPrompt } from '@/lib/agents/system-prompts';
 import transitHubsData from '@/data/transit_hubs.json';
@@ -32,7 +32,7 @@ INSTRUCTIONS: Build a multi-leg itinerary (Walk → Transit → Shuttle → Gate
     const systemPrompt = getSystemPrompt('transitflow', context);
 
     const result = streamText({
-      model: google(model),
+      model: getModelWithFallback(),
       system: systemPrompt,
       messages: await convertToModelMessages(messages),
     });

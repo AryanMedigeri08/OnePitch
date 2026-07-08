@@ -1,4 +1,4 @@
-import { google } from '@ai-sdk/google';
+import { getModelWithFallback } from '@/lib/agents/fallback-model';
 import { streamText, generateText, convertToModelMessages } from 'ai';
 import { getSystemPrompt } from '@/lib/agents/system-prompts';
 import { generateSustainabilityReadings } from '@/lib/mock-data-generator';
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
       );
 
       const result = await generateText({
-        model: google(model),
+        model: getModelWithFallback(model),
         system: systemPrompt,
         messages: [
           {
@@ -50,7 +50,7 @@ SUSTAINABILITY DATA: ${JSON.stringify(sustainability)}
     const systemPrompt = getSystemPrompt('greengoal', context);
 
     const result = streamText({
-      model: google(model),
+      model: getModelWithFallback(),
       system: systemPrompt,
       messages: await convertToModelMessages(messages),
     });
