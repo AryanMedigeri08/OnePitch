@@ -1,5 +1,5 @@
 import { google } from '@ai-sdk/google';
-import { streamText, generateText } from 'ai';
+import { streamText, generateText, convertToModelMessages } from 'ai';
 import { getSystemPrompt } from '@/lib/agents/system-prompts';
 import { generateSustainabilityReadings } from '@/lib/mock-data-generator';
 
@@ -52,7 +52,7 @@ SUSTAINABILITY DATA: ${JSON.stringify(sustainability)}
     const result = streamText({
       model: google(model),
       system: systemPrompt,
-      messages,
+      messages: await convertToModelMessages(messages),
     });
 
     return result.toUIMessageStreamResponse();

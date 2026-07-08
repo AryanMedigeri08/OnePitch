@@ -1,5 +1,5 @@
 import { google } from '@ai-sdk/google';
-import { streamText } from 'ai';
+import { streamText, convertToModelMessages } from 'ai';
 import { getSystemPrompt } from '@/lib/agents/system-prompts';
 import fansData from '@/data/fans.json';
 import volunteersData from '@/data/volunteers.json';
@@ -35,7 +35,7 @@ AVAILABLE VOLUNTEERS: ${JSON.stringify(volunteers.filter((v) => v.status === 'av
     const result = streamText({
       model: google(model),
       system: systemPrompt,
-      messages,
+      messages: await convertToModelMessages(messages),
     });
 
     return result.toUIMessageStreamResponse();

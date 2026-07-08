@@ -1,5 +1,5 @@
 import { google } from '@ai-sdk/google';
-import { streamText } from 'ai';
+import { streamText, convertToModelMessages } from 'ai';
 import { getSystemPrompt } from '@/lib/agents/system-prompts';
 import transitHubsData from '@/data/transit_hubs.json';
 import stadiumsData from '@/data/stadiums.json';
@@ -34,7 +34,7 @@ INSTRUCTIONS: Build a multi-leg itinerary (Walk → Transit → Shuttle → Gate
     const result = streamText({
       model: google(model),
       system: systemPrompt,
-      messages,
+      messages: await convertToModelMessages(messages),
     });
 
     return result.toUIMessageStreamResponse();

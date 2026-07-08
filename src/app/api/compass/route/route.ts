@@ -1,5 +1,5 @@
 import { google } from '@ai-sdk/google';
-import { streamText } from 'ai';
+import { streamText, convertToModelMessages } from 'ai';
 import { getSystemPrompt } from '@/lib/agents/system-prompts';
 import type { AgentId } from '@/lib/agents/types';
 import { generateGateDensities, getClosedGates } from '@/lib/mock-data-generator';
@@ -31,7 +31,7 @@ CLOSED GATES: ${closedGates.length > 0 ? closedGates.join(', ') : 'None'}
     const result = streamText({
       model: google(model),
       system: systemPrompt,
-      messages,
+      messages: await convertToModelMessages(messages),
     });
 
     return result.toUIMessageStreamResponse();
