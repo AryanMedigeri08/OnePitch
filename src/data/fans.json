@@ -1,0 +1,42 @@
+[
+  {
+    "id": "fan_demo_1",
+    "name": "Demo Fan — Wheelchair User",
+    "seat": { "stadium_id": "stad_nyc", "sector": "sec_100", "row": "5", "seat_number": "12" },
+    "accessibility_needs": ["wheelchair"],
+    "language": "EN",
+    "origin_hotel": "Hilton Meadowlands, East Rutherford"
+  },
+  {
+    "id": "fan_demo_2",
+    "name": "Demo Fan — Sensory Needs",
+    "seat": { "stadium_id": "stad_nyc", "sector": "sec_105", "row": "8", "seat_number": "3" },
+    "accessibility_needs": ["sensory"],
+    "language": "ES",
+    "origin_hotel": "Courtyard by Marriott, Secaucus"
+  },
+  {
+    "id": "fan_demo_3",
+    "name": "Demo Fan — Visual Impairment",
+    "seat": { "stadium_id": "stad_la", "sector": "sec_101", "row": "2", "seat_number": "7" },
+    "accessibility_needs": ["visual"],
+    "language": "EN",
+    "origin_hotel": "Holiday Inn Inglewood"
+  },
+  {
+    "id": "fan_demo_4",
+    "name": "Demo Fan — No Special Needs",
+    "seat": { "stadium_id": "stad_mex", "sector": "sec_102", "row": "15", "seat_number": "22" },
+    "accessibility_needs": [],
+    "language": "ES",
+    "origin_hotel": "Hotel Galería Plaza, CDMX"
+  },
+  {
+    "id": "fan_demo_5",
+    "name": "Demo Fan — Hearing + Medical",
+    "seat": { "stadium_id": "stad_nyc", "sector": "sec_200", "row": "10", "seat_number": "18" },
+    "accessibility_needs": ["hearing", "medical"],
+    "language": "FR",
+    "origin_hotel": "Renaissance Meadowlands Hotel"
+  }
+]

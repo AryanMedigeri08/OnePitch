@@ -1,0 +1,32 @@
+[
+  {
+    "id": "stad_nyc",
+    "name": "MetLife Stadium (mock)",
+    "city": "East Rutherford",
+    "country": "USA",
+    "capacity": 82500,
+    "gates": ["gate_a1", "gate_a2", "gate_b1", "gate_b2", "gate_c1"],
+    "sectors": ["sec_100", "sec_105", "sec_110", "sec_200", "sec_205", "sec_300"],
+    "coordinates": { "lat": 40.8128, "lng": -74.0742 }
+  },
+  {
+    "id": "stad_la",
+    "name": "SoFi Stadium (mock)",
+    "city": "Inglewood",
+    "country": "USA",
+    "capacity": 70240,
+    "gates": ["gate_d1", "gate_d2", "gate_e1", "gate_e2"],
+    "sectors": ["sec_101", "sec_106", "sec_201", "sec_206", "sec_301"],
+    "coordinates": { "lat": 33.9535, "lng": -118.3392 }
+  },
+  {
+    "id": "stad_mex",
+    "name": "Estadio Azteca (mock)",
+    "city": "Mexico City",
+    "country": "Mexico",
+    "capacity": 87523,
+    "gates": ["gate_f1", "gate_f2", "gate_g1", "gate_g2", "gate_g3"],
+    "sectors": ["sec_102", "sec_107", "sec_202", "sec_207", "sec_302"],
+    "coordinates": { "lat": 19.3029, "lng": -99.1505 }
+  }
+]

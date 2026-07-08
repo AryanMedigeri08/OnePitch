@@ -1,0 +1,162 @@
+[
+  {
+    "id": "sec_100",
+    "stadium_id": "stad_nyc",
+    "name": "Section 100 — Lower North",
+    "nearest_gate": "gate_a1",
+    "nearest_accessible_restroom": "restroom_12",
+    "nearest_food_stall": "food_09",
+    "step_free_route": true,
+    "position": { "x": 40, "y": 20 }
+  },
+  {
+    "id": "sec_105",
+    "stadium_id": "stad_nyc",
+    "name": "Section 105 — Lower NE",
+    "nearest_gate": "gate_a2",
+    "nearest_accessible_restroom": "restroom_14",
+    "nearest_food_stall": "food_11",
+    "step_free_route": true,
+    "position": { "x": 65, "y": 25 }
+  },
+  {
+    "id": "sec_110",
+    "stadium_id": "stad_nyc",
+    "name": "Section 110 — Lower East",
+    "nearest_gate": "gate_b1",
+    "nearest_accessible_restroom": "restroom_16",
+    "nearest_food_stall": "food_13",
+    "step_free_route": false,
+    "position": { "x": 80, "y": 40 }
+  },
+  {
+    "id": "sec_200",
+    "stadium_id": "stad_nyc",
+    "name": "Section 200 — Mid South",
+    "nearest_gate": "gate_b2",
+    "nearest_accessible_restroom": "restroom_20",
+    "nearest_food_stall": "food_18",
+    "step_free_route": true,
+    "position": { "x": 55, "y": 75 }
+  },
+  {
+    "id": "sec_205",
+    "stadium_id": "stad_nyc",
+    "name": "Section 205 — Mid SW",
+    "nearest_gate": "gate_b2",
+    "nearest_accessible_restroom": "restroom_22",
+    "nearest_food_stall": "food_20",
+    "step_free_route": true,
+    "position": { "x": 35, "y": 80 }
+  },
+  {
+    "id": "sec_300",
+    "stadium_id": "stad_nyc",
+    "name": "Section 300 — Upper West",
+    "nearest_gate": "gate_c1",
+    "nearest_accessible_restroom": "restroom_30",
+    "nearest_food_stall": "food_25",
+    "step_free_route": false,
+    "position": { "x": 15, "y": 45 }
+  },
+  {
+    "id": "sec_101",
+    "stadium_id": "stad_la",
+    "name": "Section 101 — Lower North",
+    "nearest_gate": "gate_d1",
+    "nearest_accessible_restroom": "restroom_40",
+    "nearest_food_stall": "food_35",
+    "step_free_route": true,
+    "position": { "x": 40, "y": 20 }
+  },
+  {
+    "id": "sec_106",
+    "stadium_id": "stad_la",
+    "name": "Section 106 — Lower East",
+    "nearest_gate": "gate_d2",
+    "nearest_accessible_restroom": "restroom_42",
+    "nearest_food_stall": "food_37",
+    "step_free_route": true,
+    "position": { "x": 80, "y": 40 }
+  },
+  {
+    "id": "sec_201",
+    "stadium_id": "stad_la",
+    "name": "Section 201 — Mid South",
+    "nearest_gate": "gate_e1",
+    "nearest_accessible_restroom": "restroom_44",
+    "nearest_food_stall": "food_39",
+    "step_free_route": true,
+    "position": { "x": 55, "y": 75 }
+  },
+  {
+    "id": "sec_206",
+    "stadium_id": "stad_la",
+    "name": "Section 206 — Mid SW",
+    "nearest_gate": "gate_e1",
+    "nearest_accessible_restroom": "restroom_46",
+    "nearest_food_stall": "food_41",
+    "step_free_route": false,
+    "position": { "x": 35, "y": 80 }
+  },
+  {
+    "id": "sec_301",
+    "stadium_id": "stad_la",
+    "name": "Section 301 — Upper West",
+    "nearest_gate": "gate_e2",
+    "nearest_accessible_restroom": "restroom_48",
+    "nearest_food_stall": "food_43",
+    "step_free_route": true,
+    "position": { "x": 15, "y": 45 }
+  },
+  {
+    "id": "sec_102",
+    "stadium_id": "stad_mex",
+    "name": "Sección 102 — Baja Norte",
+    "nearest_gate": "gate_f1",
+    "nearest_accessible_restroom": "restroom_50",
+    "nearest_food_stall": "food_45",
+    "step_free_route": true,
+    "position": { "x": 40, "y": 20 }
+  },
+  {
+    "id": "sec_107",
+    "stadium_id": "stad_mex",
+    "name": "Sección 107 — Baja Este",
+    "nearest_gate": "gate_f2",
+    "nearest_accessible_restroom": "restroom_52",
+    "nearest_food_stall": "food_47",
+    "step_free_route": false,
+    "position": { "x": 80, "y": 40 }
+  },
+  {
+    "id": "sec_202",
+    "stadium_id": "stad_mex",
+    "name": "Sección 202 — Media Sur",
+    "nearest_gate": "gate_g1",
+    "nearest_accessible_restroom": "restroom_54",
+    "nearest_food_stall": "food_49",
+    "step_free_route": true,
+    "position": { "x": 55, "y": 75 }
+  },
+  {
+    "id": "sec_207",
+    "stadium_id": "stad_mex",
+    "name": "Sección 207 — Media SO",
+    "nearest_gate": "gate_g1",
+    "nearest_accessible_restroom": "restroom_56",
+    "nearest_food_stall": "food_51",
+    "step_free_route": true,
+    "position": { "x": 35, "y": 80 }
+  },
+  {
+    "id": "sec_302",
+    "stadium_id": "stad_mex",
+    "name": "Sección 302 — Alta Oeste",
+    "nearest_gate": "gate_g2",
+    "nearest_accessible_restroom": "restroom_58",
+    "nearest_food_stall": "food_53",
+    "step_free_route": false,
+    "position": { "x": 15, "y": 45 }
+  }
+]

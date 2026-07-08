@@ -1,0 +1,108 @@
+{
+  "common": {
+    "appName": "OnePitch AI",
+    "tagline": "Multi-Agent GenAI Operations Platform",
+    "subtitle": "FWC 2026 Tournament Operations Intelligence",
+    "viewDemo": "View Live Demo",
+    "fanApp": "Fan App",
+    "volunteer": "Volunteer",
+    "commandCenter": "Command Center",
+    "loading": "Loading...",
+    "send": "Send",
+    "close": "Close",
+    "back": "Back",
+    "poweredBy": "Powered by",
+    "error": "Something went wrong. Please try again.",
+    "language": "Language",
+    "role": "Role",
+    "stadium": "Stadium",
+    "selectStadium": "Select Stadium"
+  },
+  "landing": {
+    "hero": "One Platform. Six Agents. Zero Blind Spots.",
+    "heroSub": "AI-powered operations intelligence for mega-events — from crowd safety to sustainability, all orchestrated in real-time.",
+    "feature1Title": "Compass",
+    "feature1Desc": "Real-time wayfinding with dynamic rerouting when conditions change",
+    "feature2Title": "Sentinel",
+    "feature2Desc": "AI crowd management with live density monitoring and dispatch",
+    "feature3Title": "GreenGoal",
+    "feature3Desc": "Vision-powered waste sorting and real-time sustainability tracking",
+    "orchestration": "Cross-Agent Orchestration",
+    "orchestrationDesc": "When a thunderstorm hits, all six agents coordinate — Sentinel reroutes crowds, TransitFlow delays departures, AccessAll prioritizes covered routes, and Compass pushes fan alerts. One trigger. Six responses. Zero silos.",
+    "tryScenario": "Try the Scenario Simulator →"
+  },
+  "compass": {
+    "title": "Compass",
+    "subtitle": "Navigation & Wayfinding",
+    "placeholder": "Ask for directions... (e.g., 'How do I get to my seat?')",
+    "closeGate": "Close Gate",
+    "openGate": "Open Gate",
+    "rerouting": "Rerouting..."
+  },
+  "sentinel": {
+    "title": "Sentinel",
+    "subtitle": "Crowd Management & Decision Support",
+    "placeholder": "Ask about crowd conditions... (e.g., 'Show gates above 80% capacity')",
+    "density": "Gate Density",
+    "heatmap": "Heatmap",
+    "dispatch": "Dispatch Script",
+    "incidents": "Incident Log"
+  },
+  "accessall": {
+    "title": "AccessAll",
+    "subtitle": "Accessibility Concierge",
+    "profileTitle": "Accessibility Profile",
+    "profileDesc": "Tell us about your needs for a personalized match-day plan",
+    "assistNow": "Assist Now",
+    "assistDesc": "Get immediate help from a nearby volunteer",
+    "training": "Staff Training",
+    "trainingPlaceholder": "Ask about accessibility support... (e.g., 'How do I guide a blind fan?')",
+    "generatePlan": "Generate My Plan",
+    "findVolunteer": "Find Nearest Volunteer"
+  },
+  "transitflow": {
+    "title": "TransitFlow",
+    "subtitle": "Transit & Itinerary Planning",
+    "origin": "Origin (Hotel/Location)",
+    "kickoff": "Kickoff Time",
+    "planTrip": "Plan My Trip",
+    "crossBorder": "Cross-Border Checklist",
+    "crossBorderDisclaimer": "⚠️ Demo content — not real travel/immigration advice.",
+    "primary": "Primary Route",
+    "fallback": "Fallback Option"
+  },
+  "greengoal": {
+    "title": "GreenGoal",
+    "subtitle": "Sustainability Intelligence",
+    "scanner": "Waste Scanner",
+    "scannerDesc": "Upload or take a photo to classify waste",
+    "upload": "Upload Image",
+    "takePhoto": "Take Photo",
+    "carbon": "Carbon Copilot",
+    "carbonPlaceholder": "e.g., 'How do I cut energy 15% tomorrow?'",
+    "esgReport": "ESG Report",
+    "generateReport": "Generate Report",
+    "greenPoints": "GreenPoints"
+  },
+  "volunteeros": {
+    "title": "VolunteerOS",
+    "subtitle": "Volunteer Force Multiplier",
+    "shiftSync": "Shift-Sync",
+    "sentiment": "Sentiment Pulse",
+    "sentimentPlaceholder": "How are you feeling today? Share your thoughts...",
+    "checkIn": "Check In",
+    "handoff": "Shift Handoff",
+    "handoffPlaceholder": "Paste your shift notes here...",
+    "generateSummary": "Generate Handoff Summary"
+  },
+  "scenario": {
+    "title": "Scenario Simulator",
+    "subtitle": "Cross-Agent Cascade Demo",
+    "thunderstorm": "⛈️ Sudden Thunderstorm",
+    "medical": "🚑 Medical Emergency",
+    "vip": "🔒 VIP Movement",
+    "running": "Cascade in progress...",
+    "complete": "Cascade complete",
+    "trigger": "Trigger Scenario"
+  }
+}

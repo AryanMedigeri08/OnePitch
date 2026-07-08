@@ -1,0 +1,79 @@
+[
+  {
+    "id": "hub_nyc_1",
+    "city": "East Rutherford",
+    "stadium_id": "stad_nyc",
+    "name": "Secaucus Junction",
+    "type": "rail",
+    "lines": ["NJT Rail Line 1", "NJT Rail Line 2"],
+    "next_departures": ["18:40", "18:55", "19:10", "19:25", "19:40"],
+    "walk_to_stadium_min": 25,
+    "accessible": true
+  },
+  {
+    "id": "hub_nyc_2",
+    "city": "East Rutherford",
+    "stadium_id": "stad_nyc",
+    "name": "Meadowlands Bus Terminal",
+    "type": "bus",
+    "lines": ["Route 160", "Route 171", "MetLife Express"],
+    "next_departures": ["18:30", "18:45", "19:00", "19:15", "19:30"],
+    "walk_to_stadium_min": 5,
+    "accessible": true
+  },
+  {
+    "id": "hub_nyc_3",
+    "city": "East Rutherford",
+    "stadium_id": "stad_nyc",
+    "name": "MetLife Shuttle Stop",
+    "type": "shuttle",
+    "lines": ["Fan Shuttle A", "Fan Shuttle B"],
+    "next_departures": ["18:20", "18:35", "18:50", "19:05", "19:20"],
+    "walk_to_stadium_min": 2,
+    "accessible": true
+  },
+  {
+    "id": "hub_la_1",
+    "city": "Inglewood",
+    "stadium_id": "stad_la",
+    "name": "Inglewood Transit Center",
+    "type": "rail",
+    "lines": ["K Line (Crenshaw/LAX)", "SoFi Express"],
+    "next_departures": ["17:50", "18:10", "18:30", "18:50", "19:10"],
+    "walk_to_stadium_min": 12,
+    "accessible": true
+  },
+  {
+    "id": "hub_la_2",
+    "city": "Inglewood",
+    "stadium_id": "stad_la",
+    "name": "Prairie Ave / Hardy St Bus Stop",
+    "type": "bus",
+    "lines": ["Metro Line 212", "Inglewood Circulator"],
+    "next_departures": ["18:00", "18:20", "18:40", "19:00", "19:20"],
+    "walk_to_stadium_min": 8,
+    "accessible": true
+  },
+  {
+    "id": "hub_mex_1",
+    "city": "Mexico City",
+    "stadium_id": "stad_mex",
+    "name": "Estadio Azteca Metro Station",
+    "type": "metro",
+    "lines": ["Línea 2 (Blue)"],
+    "next_departures": ["17:30", "17:38", "17:46", "17:54", "18:02"],
+    "walk_to_stadium_min": 10,
+    "accessible": true
+  },
+  {
+    "id": "hub_mex_2",
+    "city": "Mexico City",
+    "stadium_id": "stad_mex",
+    "name": "Calzada de Tlalpan Bus Stop",
+    "type": "bus",
+    "lines": ["Ruta 76", "Metrobús Línea 1"],
+    "next_departures": ["17:40", "17:55", "18:10", "18:25", "18:40"],
+    "walk_to_stadium_min": 15,
+    "accessible": false
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "stadium_id": "stad_nyc",
+    "timestamp": "2026-07-08T18:00:00Z",
+    "energy_kwh": 412,
+    "water_l": 3200,
+    "waste_kg": { "compost": 40, "recycle": 65, "landfill": 22 },
+    "solar_generation_kwh": 85,
+    "carbon_offset_kg": 120
+  },
+  {
+    "stadium_id": "stad_la",
+    "timestamp": "2026-07-08T18:00:00Z",
+    "energy_kwh": 380,
+    "water_l": 2800,
+    "waste_kg": { "compost": 35, "recycle": 58, "landfill": 28 },
+    "solar_generation_kwh": 145,
+    "carbon_offset_kg": 95
+  },
+  {
+    "stadium_id": "stad_mex",
+    "timestamp": "2026-07-08T18:00:00Z",
+    "energy_kwh": 450,
+    "water_l": 3500,
+    "waste_kg": { "compost": 48, "recycle": 72, "landfill": 30 },
+    "solar_generation_kwh": 110,
+    "carbon_offset_kg": 105
+  }
+]

@@ -1,0 +1,108 @@
+{
+  "common": {
+    "appName": "OnePitch AI",
+    "tagline": "Plateforme d'Opérations Multi-Agent GenAI",
+    "subtitle": "Intelligence Opérationnelle du Tournoi FWC 2026",
+    "viewDemo": "Voir la Démo",
+    "fanApp": "App Fan",
+    "volunteer": "Bénévole",
+    "commandCenter": "Centre de Commandement",
+    "loading": "Chargement...",
+    "send": "Envoyer",
+    "close": "Fermer",
+    "back": "Retour",
+    "poweredBy": "Propulsé par",
+    "error": "Une erreur est survenue. Veuillez réessayer.",
+    "language": "Langue",
+    "role": "Rôle",
+    "stadium": "Stade",
+    "selectStadium": "Sélectionner le Stade"
+  },
+  "landing": {
+    "hero": "Une Plateforme. Six Agents. Zéro Angle Mort.",
+    "heroSub": "Intelligence opérationnelle alimentée par l'IA pour les méga-événements — de la sécurité des foules à la durabilité, orchestrée en temps réel.",
+    "feature1Title": "Compass",
+    "feature1Desc": "Navigation en temps réel avec réacheminement dynamique",
+    "feature2Title": "Sentinel",
+    "feature2Desc": "Gestion des foules par IA avec surveillance de densité en direct",
+    "feature3Title": "GreenGoal",
+    "feature3Desc": "Tri des déchets par vision IA et suivi de durabilité en temps réel",
+    "orchestration": "Orchestration Multi-Agent",
+    "orchestrationDesc": "Quand un orage frappe, les six agents se coordonnent — Sentinel réachemine les foules, TransitFlow retarde les départs, AccessAll priorise les itinéraires couverts et Compass envoie des alertes.",
+    "tryScenario": "Essayer le Simulateur de Scénarios →"
+  },
+  "compass": {
+    "title": "Compass",
+    "subtitle": "Navigation et Orientation",
+    "placeholder": "Demandez votre chemin... (ex., 'Comment accéder à mon siège ?')",
+    "closeGate": "Fermer Porte",
+    "openGate": "Ouvrir Porte",
+    "rerouting": "Réacheminement..."
+  },
+  "sentinel": {
+    "title": "Sentinel",
+    "subtitle": "Gestion des Foules et Aide à la Décision",
+    "placeholder": "Interrogez sur les conditions... (ex., 'Portes à plus de 80%')",
+    "density": "Densité des Portes",
+    "heatmap": "Carte de Chaleur",
+    "dispatch": "Script de Dispatch",
+    "incidents": "Journal des Incidents"
+  },
+  "accessall": {
+    "title": "AccessAll",
+    "subtitle": "Conciergerie d'Accessibilité",
+    "profileTitle": "Profil d'Accessibilité",
+    "profileDesc": "Parlez-nous de vos besoins pour un plan personnalisé",
+    "assistNow": "Assistance Maintenant",
+    "assistDesc": "Obtenez l'aide immédiate d'un bénévole proche",
+    "training": "Formation du Personnel",
+    "trainingPlaceholder": "Posez des questions sur l'accessibilité...",
+    "generatePlan": "Générer Mon Plan",
+    "findVolunteer": "Trouver le Bénévole le Plus Proche"
+  },
+  "transitflow": {
+    "title": "TransitFlow",
+    "subtitle": "Planification de Transit et Itinéraires",
+    "origin": "Origine (Hôtel/Lieu)",
+    "kickoff": "Heure du Coup d'Envoi",
+    "planTrip": "Planifier Mon Trajet",
+    "crossBorder": "Checklist Transfrontalière",
+    "crossBorderDisclaimer": "⚠️ Contenu de démonstration — pas de vrais conseils de voyage/immigration.",
+    "primary": "Itinéraire Principal",
+    "fallback": "Option Alternative"
+  },
+  "greengoal": {
+    "title": "GreenGoal",
+    "subtitle": "Intelligence Durable",
+    "scanner": "Scanner de Déchets",
+    "scannerDesc": "Téléchargez ou prenez une photo pour classifier les déchets",
+    "upload": "Télécharger Image",
+    "takePhoto": "Prendre Photo",
+    "carbon": "Copilote Carbone",
+    "carbonPlaceholder": "ex., 'Comment réduire l'énergie de 15% demain ?'",
+    "esgReport": "Rapport ESG",
+    "generateReport": "Générer le Rapport",
+    "greenPoints": "PointsVerts"
+  },
+  "volunteeros": {
+    "title": "VolunteerOS",
+    "subtitle": "Multiplicateur de Force Bénévole",
+    "shiftSync": "Sync-Horaire",
+    "sentiment": "Pouls du Sentiment",
+    "sentimentPlaceholder": "Comment vous sentez-vous aujourd'hui ?",
+    "checkIn": "Enregistrement",
+    "handoff": "Passation de Quart",
+    "handoffPlaceholder": "Collez vos notes de quart ici...",
+    "generateSummary": "Générer le Résumé de Passation"
+  },
+  "scenario": {
+    "title": "Simulateur de Scénarios",
+    "subtitle": "Démo de Cascade Multi-Agent",
+    "thunderstorm": "⛈️ Orage Soudain",
+    "medical": "🚑 Urgence Médicale",
+    "vip": "🔒 Mouvement VIP",
+    "running": "Cascade en cours...",
+    "complete": "Cascade terminée",
+    "trigger": "Déclencher le Scénario"
+  }
+}

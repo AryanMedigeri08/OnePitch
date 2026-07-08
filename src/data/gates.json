@@ -1,0 +1,156 @@
+[
+  {
+    "id": "gate_a1",
+    "stadium_id": "stad_nyc",
+    "name": "Gate A1 — North Main",
+    "status": "open",
+    "capacity_per_min": 180,
+    "current_density_ppl_m2": 2.1,
+    "connected_sectors": ["sec_100", "sec_105"],
+    "position": { "x": 50, "y": 5 },
+    "accessible": true
+  },
+  {
+    "id": "gate_a2",
+    "stadium_id": "stad_nyc",
+    "name": "Gate A2 — North East",
+    "status": "open",
+    "capacity_per_min": 150,
+    "current_density_ppl_m2": 1.8,
+    "connected_sectors": ["sec_105", "sec_110"],
+    "position": { "x": 80, "y": 15 },
+    "accessible": true
+  },
+  {
+    "id": "gate_b1",
+    "stadium_id": "stad_nyc",
+    "name": "Gate B1 — East",
+    "status": "open",
+    "capacity_per_min": 200,
+    "current_density_ppl_m2": 3.2,
+    "connected_sectors": ["sec_110", "sec_200"],
+    "position": { "x": 95, "y": 50 },
+    "accessible": false
+  },
+  {
+    "id": "gate_b2",
+    "stadium_id": "stad_nyc",
+    "name": "Gate B2 — South",
+    "status": "open",
+    "capacity_per_min": 170,
+    "current_density_ppl_m2": 1.5,
+    "connected_sectors": ["sec_200", "sec_205"],
+    "position": { "x": 50, "y": 95 },
+    "accessible": true
+  },
+  {
+    "id": "gate_c1",
+    "stadium_id": "stad_nyc",
+    "name": "Gate C1 — West Main",
+    "status": "open",
+    "capacity_per_min": 190,
+    "current_density_ppl_m2": 2.7,
+    "connected_sectors": ["sec_300", "sec_100"],
+    "position": { "x": 5, "y": 50 },
+    "accessible": true
+  },
+  {
+    "id": "gate_d1",
+    "stadium_id": "stad_la",
+    "name": "Gate D1 — North",
+    "status": "open",
+    "capacity_per_min": 160,
+    "current_density_ppl_m2": 1.9,
+    "connected_sectors": ["sec_101", "sec_106"],
+    "position": { "x": 50, "y": 5 },
+    "accessible": true
+  },
+  {
+    "id": "gate_d2",
+    "stadium_id": "stad_la",
+    "name": "Gate D2 — East",
+    "status": "open",
+    "capacity_per_min": 175,
+    "current_density_ppl_m2": 2.4,
+    "connected_sectors": ["sec_106", "sec_201"],
+    "position": { "x": 95, "y": 50 },
+    "accessible": false
+  },
+  {
+    "id": "gate_e1",
+    "stadium_id": "stad_la",
+    "name": "Gate E1 — South",
+    "status": "open",
+    "capacity_per_min": 185,
+    "current_density_ppl_m2": 1.3,
+    "connected_sectors": ["sec_201", "sec_206"],
+    "position": { "x": 50, "y": 95 },
+    "accessible": true
+  },
+  {
+    "id": "gate_e2",
+    "stadium_id": "stad_la",
+    "name": "Gate E2 — West",
+    "status": "open",
+    "capacity_per_min": 155,
+    "current_density_ppl_m2": 2.0,
+    "connected_sectors": ["sec_301", "sec_101"],
+    "position": { "x": 5, "y": 50 },
+    "accessible": true
+  },
+  {
+    "id": "gate_f1",
+    "stadium_id": "stad_mex",
+    "name": "Puerta F1 — Norte",
+    "status": "open",
+    "capacity_per_min": 200,
+    "current_density_ppl_m2": 2.8,
+    "connected_sectors": ["sec_102", "sec_107"],
+    "position": { "x": 50, "y": 5 },
+    "accessible": true
+  },
+  {
+    "id": "gate_f2",
+    "stadium_id": "stad_mex",
+    "name": "Puerta F2 — Este",
+    "status": "open",
+    "capacity_per_min": 180,
+    "current_density_ppl_m2": 3.5,
+    "connected_sectors": ["sec_107", "sec_202"],
+    "position": { "x": 95, "y": 50 },
+    "accessible": false
+  },
+  {
+    "id": "gate_g1",
+    "stadium_id": "stad_mex",
+    "name": "Puerta G1 — Sur",
+    "status": "open",
+    "capacity_per_min": 210,
+    "current_density_ppl_m2": 1.6,
+    "connected_sectors": ["sec_202", "sec_207"],
+    "position": { "x": 50, "y": 95 },
+    "accessible": true
+  },
+  {
+    "id": "gate_g2",
+    "stadium_id": "stad_mex",
+    "name": "Puerta G2 — Oeste",
+    "status": "open",
+    "capacity_per_min": 195,
+    "current_density_ppl_m2": 2.2,
+    "connected_sectors": ["sec_302", "sec_102"],
+    "position": { "x": 5, "y": 50 },
+    "accessible": true
+  },
+  {
+    "id": "gate_g3",
+    "stadium_id": "stad_mex",
+    "name": "Puerta G3 — Noroeste",
+    "status": "open",
+    "capacity_per_min": 170,
+    "current_density_ppl_m2": 1.4,
+    "connected_sectors": ["sec_302", "sec_102"],
+    "position": { "x": 20, "y": 15 },
+    "accessible": true
+  }
+]

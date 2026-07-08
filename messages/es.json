@@ -1,0 +1,108 @@
+{
+  "common": {
+    "appName": "OnePitch AI",
+    "tagline": "Plataforma de Operaciones Multi-Agente GenAI",
+    "subtitle": "Inteligencia Operativa del Torneo FWC 2026",
+    "viewDemo": "Ver Demo en Vivo",
+    "fanApp": "App del Fan",
+    "volunteer": "Voluntario",
+    "commandCenter": "Centro de Mando",
+    "loading": "Cargando...",
+    "send": "Enviar",
+    "close": "Cerrar",
+    "back": "Atrás",
+    "poweredBy": "Impulsado por",
+    "error": "Algo salió mal. Inténtelo de nuevo.",
+    "language": "Idioma",
+    "role": "Rol",
+    "stadium": "Estadio",
+    "selectStadium": "Seleccionar Estadio"
+  },
+  "landing": {
+    "hero": "Una Plataforma. Seis Agentes. Cero Puntos Ciegos.",
+    "heroSub": "Inteligencia operativa impulsada por IA para mega-eventos — desde seguridad de multitudes hasta sostenibilidad, todo orquestado en tiempo real.",
+    "feature1Title": "Compass",
+    "feature1Desc": "Navegación en tiempo real con reencaminamiento dinámico ante cambios",
+    "feature2Title": "Sentinel",
+    "feature2Desc": "Gestión de multitudes con IA y monitoreo de densidad en vivo",
+    "feature3Title": "GreenGoal",
+    "feature3Desc": "Clasificación de residuos por visión y seguimiento de sostenibilidad",
+    "orchestration": "Orquestación Multi-Agente",
+    "orchestrationDesc": "Cuando llega una tormenta, los seis agentes coordinan — Sentinel reencamina multitudes, TransitFlow retrasa salidas, AccessAll prioriza rutas cubiertas y Compass envía alertas a los fans.",
+    "tryScenario": "Prueba el Simulador de Escenarios →"
+  },
+  "compass": {
+    "title": "Compass",
+    "subtitle": "Navegación y Orientación",
+    "placeholder": "Pide indicaciones... (ej., '¿Cómo llego a mi asiento?')",
+    "closeGate": "Cerrar Puerta",
+    "openGate": "Abrir Puerta",
+    "rerouting": "Reencaminando..."
+  },
+  "sentinel": {
+    "title": "Sentinel",
+    "subtitle": "Gestión de Multitudes y Soporte de Decisiones",
+    "placeholder": "Pregunta sobre las condiciones... (ej., 'Muestra puertas con más del 80%')",
+    "density": "Densidad de Puertas",
+    "heatmap": "Mapa de Calor",
+    "dispatch": "Guión de Despacho",
+    "incidents": "Registro de Incidentes"
+  },
+  "accessall": {
+    "title": "AccessAll",
+    "subtitle": "Conserjería de Accesibilidad",
+    "profileTitle": "Perfil de Accesibilidad",
+    "profileDesc": "Cuéntanos tus necesidades para un plan personalizado del día del partido",
+    "assistNow": "Asistencia Ahora",
+    "assistDesc": "Obtén ayuda inmediata de un voluntario cercano",
+    "training": "Capacitación del Personal",
+    "trainingPlaceholder": "Pregunta sobre soporte de accesibilidad...",
+    "generatePlan": "Generar Mi Plan",
+    "findVolunteer": "Encontrar Voluntario Más Cercano"
+  },
+  "transitflow": {
+    "title": "TransitFlow",
+    "subtitle": "Planificación de Tránsito e Itinerarios",
+    "origin": "Origen (Hotel/Ubicación)",
+    "kickoff": "Hora de Inicio",
+    "planTrip": "Planificar Mi Viaje",
+    "crossBorder": "Lista Transfronteriza",
+    "crossBorderDisclaimer": "⚠️ Contenido de demostración — no es asesoría real de viaje/inmigración.",
+    "primary": "Ruta Principal",
+    "fallback": "Opción Alternativa"
+  },
+  "greengoal": {
+    "title": "GreenGoal",
+    "subtitle": "Inteligencia de Sostenibilidad",
+    "scanner": "Escáner de Residuos",
+    "scannerDesc": "Sube o toma una foto para clasificar residuos",
+    "upload": "Subir Imagen",
+    "takePhoto": "Tomar Foto",
+    "carbon": "Copiloto de Carbono",
+    "carbonPlaceholder": "ej., '¿Cómo reduzco la energía un 15% mañana?'",
+    "esgReport": "Informe ESG",
+    "generateReport": "Generar Informe",
+    "greenPoints": "PuntosVerdes"
+  },
+  "volunteeros": {
+    "title": "VolunteerOS",
+    "subtitle": "Multiplicador de Fuerza Voluntaria",
+    "shiftSync": "Sincro-Turno",
+    "sentiment": "Pulso de Sentimiento",
+    "sentimentPlaceholder": "¿Cómo te sientes hoy? Comparte tus pensamientos...",
+    "checkIn": "Registrarse",
+    "handoff": "Traspaso de Turno",
+    "handoffPlaceholder": "Pega tus notas de turno aquí...",
+    "generateSummary": "Generar Resumen de Traspaso"
+  },
+  "scenario": {
+    "title": "Simulador de Escenarios",
+    "subtitle": "Demo de Cascada Multi-Agente",
+    "thunderstorm": "⛈️ Tormenta Repentina",
+    "medical": "🚑 Emergencia Médica",
+    "vip": "🔒 Movimiento VIP",
+    "running": "Cascada en progreso...",
+    "complete": "Cascada completada",
+    "trigger": "Activar Escenario"
+  }
+}
