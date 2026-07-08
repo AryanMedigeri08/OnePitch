@@ -16,6 +16,77 @@ interface AgentChatProps {
   className?: string;
 }
 
+function formatInline(text: string): React.ReactNode[] {
+  const parts = text.split(/(\*\*.*?\*\*|\*.*?\*)/g);
+  return parts.map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={index} className="font-bold">{part.slice(2, -2)}</strong>;
+    }
+    if (part.startsWith('*') && part.endsWith('*')) {
+      return <strong key={index} className="font-bold">{part.slice(1, -1)}</strong>;
+    }
+    return part;
+  });
+}
+
+function parseMarkdown(text: string): React.ReactNode {
+  const lines = text.split('\n');
+  const elements: React.ReactNode[] = [];
+
+  lines.forEach((line, index) => {
+    const listMatch = line.match(/^\s*[-*]\s+(.*)$/);
+    if (listMatch) {
+      elements.push(
+        <li key={`li-${index}`} className="ml-4 list-disc mb-1">
+          {formatInline(listMatch[1])}
+        </li>
+      );
+      return;
+    }
+
+    const h3Match = line.match(/^###\s+(.*)$/);
+    if (h3Match) {
+      elements.push(
+        <h4 key={`h4-${index}`} className="font-bold text-sm mt-3 mb-1">
+          {formatInline(h3Match[1])}
+        </h4>
+      );
+      return;
+    }
+    const h2Match = line.match(/^##\s+(.*)$/);
+    if (h2Match) {
+      elements.push(
+        <h3 key={`h3-${index}`} className="font-bold text-base mt-4 mb-2">
+          {formatInline(h2Match[1])}
+        </h3>
+      );
+      return;
+    }
+    const h1Match = line.match(/^#\s+(.*)$/);
+    if (h1Match) {
+      elements.push(
+        <h2 key={`h2-${index}`} className="font-extrabold text-lg mt-4 mb-2">
+          {formatInline(h1Match[1])}
+        </h2>
+      );
+      return;
+    }
+
+    if (line.trim() === '') {
+      elements.push(<div key={`br-${index}`} className="h-2" />);
+      return;
+    }
+
+    elements.push(
+      <p key={`p-${index}`} className="mb-1 leading-relaxed">
+        {formatInline(line)}
+      </p>
+    );
+  });
+
+  return <div className="space-y-1">{elements}</div>;
+}
+
 export function AgentChat({
   agentId,
   apiEndpoint,
@@ -147,7 +218,7 @@ export function AgentChat({
               <div className="whitespace-pre-wrap">
                 {msg.parts.map((part, idx) => {
                   if (part.type === 'text') {
-                    return <span key={idx}>{part.text}</span>;
+                    return <div key={idx}>{parseMarkdown(part.text)}</div>;
                   }
                   return null;
                 })}
