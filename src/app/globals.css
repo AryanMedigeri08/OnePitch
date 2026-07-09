@@ -1,45 +1,37 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 /* ============================================
-   OnePitch AI — Design System
+   OnePitch AI — Premium Ultra-Modern Design System
    ============================================ */
 
 @theme inline {
-  /* Brand Colors */
-  --color-brand-navy: #0A1628;
-  --color-brand-navy-light: #132040;
-  --color-brand-navy-mid: #1A2D50;
-  --color-brand-green: #00E676;
-  --color-brand-green-dim: #00C853;
-  --color-brand-amber: #FFB300;
-  --color-brand-crimson: #FF3D00;
-  --color-brand-blue: #448AFF;
-  --color-brand-purple: #7C4DFF;
-  --color-brand-pink: #FF4081;
-  --color-brand-teal: #00BCD4;
+  /* Premium Tailored HSL Colors */
+  --color-brand-navy: #030712;         /* Pitch Black Navy */
+  --color-brand-navy-light: #0B132B;   /* Deep Tech Space Blue */
+  --color-brand-navy-mid: #1C2541;     /* Midnight Blue */
+  --color-brand-green: #10B981;        /* Neo Mint Emerald */
+  --color-brand-green-dim: #059669;    /* Forest Emerald */
+  --color-brand-amber: #F59E0B;        /* Golden Solar Amber */
+  --color-brand-crimson: #EF4444;      /* Tactical Crimson Red */
+  --color-brand-blue: #3B82F6;         /* Electric Neon Blue */
+  --color-brand-purple: #8B5CF6;       /* Hyper Violet Purple */
+  --color-brand-pink: #EC4899;         /* Vibrant Neon Pink */
+  --color-brand-teal: #06B6D4;         /* Cyber Teal */
 
-  /* Semantic Colors */
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-surface: var(--surface);
-  --color-surface-raised: var(--surface-raised);
-  --color-muted: var(--muted);
-  --color-border-color: var(--border-color);
+  /* Density Palette */
+  --color-density-green: #10B981;
+  --color-density-yellow: #EAB308;
+  --color-density-orange: #F97316;
+  --color-density-red: #EF4444;
 
-  /* Density Colors */
-  --color-density-green: #00E676;
-  --color-density-yellow: #FFD600;
-  --color-density-orange: #FF9100;
-  --color-density-red: #FF3D00;
-
-  /* Typography */
-  --font-sans: "Inter", var(--font-geist-sans), system-ui, sans-serif;
+  /* Premium Typography (Plus Jakarta Sans) */
+  --font-sans: "Plus Jakarta Sans", var(--font-geist-sans), system-ui, sans-serif;
   --font-mono: "JetBrains Mono", var(--font-geist-mono), monospace;
-  --font-display: "Inter", var(--font-geist-sans), system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", var(--font-geist-sans), system-ui, sans-serif;
 }
 
-/* Light mode (Fan App) */
+/* Light theme — clean, fluid, elevated (Fan/Volunteer concourse interfaces) */
 :root {
   --background: #F8FAFC;
   --foreground: #0F172A;
@@ -47,52 +39,69 @@
   --surface-raised: #F1F5F9;
   --muted: #64748B;
   --border-color: #E2E8F0;
+  --accent-glow: rgba(59, 130, 246, 0.15);
 }
 
-/* Dark mode (Command Center) */
+/* Dark theme — sleek, immersive tactical dashboard (Command operations interface) */
 .dark, [data-theme="dark"] {
-  --background: #0A1628;
-  --foreground: #E2E8F0;
-  --surface: #132040;
-  --surface-raised: #1A2D50;
+  --background: #030712;
+  --foreground: #F3F4F6;
+  --surface: #0B132B;
+  --surface-raised: #1C2541;
   --muted: #94A3B8;
-  --border-color: #1E3A5F;
+  --border-color: #1E293B;
+  --accent-glow: rgba(16, 185, 129, 0.15);
 }
 
 /* ============================================
-   Base Styles
+   Base Customizations
    ============================================ */
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.2);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.4);
 }
 
 /* ============================================
-   Animations
+   Animations & Transitions
    ============================================ */
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.4); }
-  50% { box-shadow: 0 0 20px 4px rgba(0, 230, 118, 0.2); }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px rgba(16, 185, 129, 0.2);
+    transform: scale(1.05);
+  }
 }
 
 @keyframes slide-up {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slide-in-right {
-  from { opacity: 0; transform: translateX(24px); }
-  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes fade-in {
@@ -100,75 +109,24 @@ body {
   to { opacity: 1; }
 }
 
-@keyframes cascade-reveal {
-  from { opacity: 0; transform: translateY(12px) scale(0.97); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-@keyframes density-pulse {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 1; }
-}
-
 @keyframes typing-dot {
   0%, 60%, 100% { opacity: 0.3; transform: scale(0.8); }
-  30% { opacity: 1; transform: scale(1); }
+  30% { opacity: 1; transform: scale(1.05); }
 }
-
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes green-points-pop {
-  0% { transform: scale(0.5); opacity: 0; }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-/* ============================================
-   Utility Classes
-   ============================================ */
 
 .animate-slide-up {
-  animation: slide-up 0.5s ease-out forwards;
-}
-
-.animate-slide-in-right {
-  animation: slide-in-right 0.4s ease-out forwards;
+  animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-fade-in {
   animation: fade-in 0.3s ease-out forwards;
 }
 
-.animate-cascade-reveal {
-  animation: cascade-reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-density-pulse {
-  animation: density-pulse 2s ease-in-out infinite;
-}
-
-.animate-shimmer {
-  background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,0.1) 50%, transparent 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-}
-
 .animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
+  animation: pulse-glow 2.5s ease-in-out infinite;
 }
 
-.animate-spin-slow {
-  animation: spin-slow 3s linear infinite;
-}
-
-.animate-green-points {
-  animation: green-points-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-/* Typing indicator */
+/* Typing dot indicators */
 .typing-dot {
   width: 6px;
   height: 6px;
@@ -176,95 +134,78 @@ body {
   background: currentColor;
   animation: typing-dot 1.4s ease-in-out infinite;
 }
-
 .typing-dot:nth-child(2) { animation-delay: 0.2s; }
 .typing-dot:nth-child(3) { animation-delay: 0.4s; }
 
-/* Glassmorphism */
-.glass {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
+/* ============================================
+   Ultra-Premium Glassmorphism & Card Styles
+   ============================================ */
 
-.glass-light {
+.glass-card {
   background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
 }
 
-/* Gradient borders */
-.gradient-border {
-  position: relative;
+.dark .glass-card, [data-theme="dark"] .glass-card {
+  background: rgba(11, 19, 43, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(28, 37, 65, 0.65);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
 }
 
-.gradient-border::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, #00E676, #448AFF, #7C4DFF);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+/* Tech card styles */
+.tech-card {
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  border: 1px solid var(--border-color);
+  background: var(--surface);
 }
 
-/* Agent card hover effect */
-.agent-card {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.agent-card:hover {
+.tech-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+  border-color: rgba(59, 130, 246, 0.3);
 }
 
-/* Scrollbar styling for dark mode */
-.dark ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+.dark .tech-card:hover, [data-theme="dark"] .tech-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  border-color: rgba(16, 185, 129, 0.3);
 }
 
-.dark ::-webkit-scrollbar-track {
-  background: #132040;
+/* Gradient highlight text */
+.gradient-text-green-blue {
+  background: linear-gradient(135deg, #10B981 0%, #3B82F6 100%);
+  -webkit-mask-image: linear-gradient(135deg, #10B981 0%, #3B82F6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-.dark ::-webkit-scrollbar-thumb {
-  background: #1E3A5F;
-  border-radius: 3px;
+.gradient-text-purple-pink {
+  background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+  -webkit-mask-image: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: #2A4A6F;
-}
-
-/* Chat message styling */
-.chat-message {
-  animation: slide-up 0.3s ease-out forwards;
-}
-
-.chat-message pre {
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
-  padding: 12px;
-  overflow-x: auto;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.85em;
-}
-
-.dark .chat-message pre {
-  background: rgba(0, 0, 0, 0.3);
-}
-
-/* Model tag badge */
-.model-tag {
+/* Dashboard Metrics */
+.metric-badge {
   font-family: "JetBrains Mono", monospace;
   font-size: 0.65rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  opacity: 0.6;
+}
+
+/* Custom visual focus for accessibility keyboard users */
+*:focus-visible {
+  outline: 2px solid var(--color-brand-blue);
+  outline-offset: 4px;
+}
+
+.dark *:focus-visible {
+  outline: 2px solid var(--color-brand-green);
 }

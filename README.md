@@ -71,7 +71,7 @@ OnePitch is built directly in alignment with the core challenges of **FIFA World
 ```bash
 npm install
 cp .env.local.example .env.local
-# Add your GOOGLE_GENERATIVE_AI_API_KEY
+# Add your GOOGLE_GENERATIVE_AI_API_KEY and GROQ_API_KEY
 npm run dev
 ```
 
