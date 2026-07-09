@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect, type FormEvent } from 'react';
+import { useState, useRef, useEffect, useMemo, memo, type FormEvent } from 'react';
 import { Send, Loader2 } from 'lucide-react';
 import { useChat } from '@ai-sdk/react';
 import type { AgentId } from '@/lib/agents/types';
@@ -86,6 +86,11 @@ function parseMarkdown(text: string): React.ReactNode {
 
   return <div className="space-y-1">{elements}</div>;
 }
+
+const MarkdownMemo = memo(function MarkdownMemo({ text }: { text: string }) {
+  const parsed = useMemo(() => parseMarkdown(text), [text]);
+  return <>{parsed}</>;
+});
 
 export function AgentChat({
   agentId,
@@ -222,7 +227,7 @@ export function AgentChat({
               <div className="whitespace-pre-wrap">
                 {msg.parts.map((part, idx) => {
                   if (part.type === 'text') {
-                    return <div key={idx}>{parseMarkdown(part.text)}</div>;
+                    return <div key={idx}><MarkdownMemo text={part.text} /></div>;
                   }
                   return null;
                 })}

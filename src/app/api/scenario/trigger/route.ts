@@ -44,7 +44,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const { scenario } = valRes.data;
+    const scenario = valRes.data.scenario as ScenarioType;
 
     // Log the incident
     addIncident({
