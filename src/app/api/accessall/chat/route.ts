@@ -1,13 +1,13 @@
 import { getModelWithFallback } from '@/lib/agents/fallback-model';
 import { streamText, convertToModelMessages } from 'ai';
 import { getSystemPrompt } from '@/lib/agents/system-prompts';
+import { secureRouteHandler } from '@/lib/security/secure-route';
 import fansData from '@/data/fans.json';
 import volunteersData from '@/data/volunteers.json';
 import sectorsData from '@/data/sectors.json';
 
 export async function POST(req: Request) {
-  try {
-    const { messages, fanId, needs, stadiumId, mode } = await req.json();
+  return secureRouteHandler(req, async ({ messages, fanId, needs, stadiumId, mode }) => {
     const sid = stadiumId || 'stad_nyc';
 
     const fan = fansData.find((f) => f.id === fanId) || fansData[0];
@@ -38,11 +38,5 @@ AVAILABLE VOLUNTEERS: ${JSON.stringify(volunteers.filter((v) => v.status === 'av
     });
 
     return result.toUIMessageStreamResponse();
-  } catch (error) {
-    console.error('AccessAll error:', error);
-    return new Response(
-      JSON.stringify({ error: 'Failed to process request' }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
-    );
-  }
+  });
 }

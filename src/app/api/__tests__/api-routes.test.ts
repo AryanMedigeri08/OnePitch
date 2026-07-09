@@ -38,8 +38,8 @@ describe('Scenario Trigger API Route', () => {
     expect(response.status).toBe(400);
     
     const body = await response.json();
-    expect(body).toHaveProperty('error');
-    expect(body.error).toBe('Invalid scenario type');
+    expect(body).toHaveProperty('errors');
+    expect(Array.isArray(body.errors)).toBe(true);
   });
 
   it('triggers a valid scenario and starts SSE stream', async () => {

@@ -1,12 +1,12 @@
 import { getModelWithFallback } from '@/lib/agents/fallback-model';
 import { streamText, convertToModelMessages } from 'ai';
 import { getSystemPrompt } from '@/lib/agents/system-prompts';
+import { secureRouteHandler } from '@/lib/security/secure-route';
 import transitHubsData from '@/data/transit_hubs.json';
 import stadiumsData from '@/data/stadiums.json';
 
 export async function POST(req: Request) {
-  try {
-    const { messages, stadiumId, origin, kickoffTime, needs, mode } = await req.json();
+  return secureRouteHandler(req, async ({ messages, stadiumId, origin, kickoffTime, needs, mode }) => {
     const sid = stadiumId || 'stad_nyc';
 
     const stadium = stadiumsData.find((s) => s.id === sid);
@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     let context = `
 STADIUM: ${JSON.stringify(stadium)}
 TRANSIT HUBS:
-${hubs.map((h) => `  ${h.name} (${h.type}) — Lines: ${h.lines.join(', ')} — Next departures: ${h.next_departures.join(', ')} — Walk to stadium: ${h.walk_to_stadium_min} min — Accessible: ${h.accessible}`).join('\n')}
+${hubs.map((h) => `  ${h.name} (${h.type}) — Lines: ${h.lines.join(', ')} — Next departures: ${h.next_departures.join(', ')} — Walk to stadium: ${h.accessible ? h.walk_to_stadium_min : h.walk_to_stadium_min + 5} min — Accessible: ${h.accessible}`).join('\n')}
 `;
 
     if (mode === 'crossborder') {
@@ -28,7 +28,6 @@ ACCESSIBILITY NEEDS: ${JSON.stringify(needs || [])}
 INSTRUCTIONS: Build a multi-leg itinerary (Walk → Transit → Shuttle → Gate). Show PRIMARY route + FALLBACK. Recommend arriving 90 min before kickoff.`;
     }
 
-    const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
     const systemPrompt = getSystemPrompt('transitflow', context);
 
     const result = streamText({
@@ -38,11 +37,5 @@ INSTRUCTIONS: Build a multi-leg itinerary (Walk → Transit → Shuttle → Gate
     });
 
     return result.toUIMessageStreamResponse();
-  } catch (error) {
-    console.error('TransitFlow error:', error);
-    return new Response(
-      JSON.stringify({ error: 'Failed to process request' }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
-    );
-  }
+  });
 }

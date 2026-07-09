@@ -1,11 +1,11 @@
 import { getModelWithFallback } from '@/lib/agents/fallback-model';
 import { streamText, convertToModelMessages } from 'ai';
 import { getSystemPrompt } from '@/lib/agents/system-prompts';
+import { secureRouteHandler } from '@/lib/security/secure-route';
 import volunteersData from '@/data/volunteers.json';
 
 export async function POST(req: Request) {
-  try {
-    const { messages, volunteerId, stadiumId, mode } = await req.json();
+  return secureRouteHandler(req, async ({ messages, volunteerId, stadiumId, mode }) => {
     const sid = stadiumId || 'stad_nyc';
     const volunteer = volunteersData.find((v) => v.id === volunteerId) || volunteersData[0];
 
@@ -22,7 +22,6 @@ ALL VOLUNTEERS AT STADIUM: ${JSON.stringify(volunteersData.filter((v) => v.stadi
       context += '\nMODE: GENERAL — Answer volunteer procedure questions with concise, actionable guidance.';
     }
 
-    const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
     const systemPrompt = getSystemPrompt('volunteeros', context);
 
     const result = streamText({
@@ -32,11 +31,5 @@ ALL VOLUNTEERS AT STADIUM: ${JSON.stringify(volunteersData.filter((v) => v.stadi
     });
 
     return result.toUIMessageStreamResponse();
-  } catch (error) {
-    console.error('VolunteerOS error:', error);
-    return new Response(
-      JSON.stringify({ error: 'Failed to process request' }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
-    );
-  }
+  });
 }

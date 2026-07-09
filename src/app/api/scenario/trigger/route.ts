@@ -1,19 +1,50 @@
 import { getCascadeEvents } from '@/lib/agents/orchestrator';
 import { addIncident } from '@/lib/mock-data-generator';
 import type { ScenarioType } from '@/lib/agents/types';
+import { rateLimit } from '@/lib/security/rate-limiter';
+import { validateScenarioRequest } from '@/lib/security/input-validator';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
   try {
-    const { scenario } = await req.json() as { scenario: ScenarioType };
-
-    if (!['thunderstorm', 'medical', 'vip'].includes(scenario)) {
+    // 1. Rate Limiting
+    const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';
+    const limitRes = rateLimit(`${ip}:scenario-trigger`, 5);
+    
+    if (!limitRes.success) {
       return new Response(
-        JSON.stringify({ error: 'Invalid scenario type' }),
-        { status: 400, headers: { 'Content-Type': 'application/json' } }
+        JSON.stringify({ error: 'Too many requests. Please try again later.' }),
+        {
+          status: 429,
+          headers: {
+            'Content-Type': 'application/json',
+            'X-RateLimit-Limit': String(limitRes.limit),
+            'X-RateLimit-Remaining': String(limitRes.remaining),
+            'X-RateLimit-Reset': String(limitRes.reset),
+            'X-Content-Type-Options': 'nosniff',
+          },
+        }
       );
     }
+
+    // 2. Input Validation
+    const body = await req.json();
+    const valRes = validateScenarioRequest(body);
+    if (!valRes.success || !valRes.data) {
+      return new Response(
+        JSON.stringify({ errors: valRes.errors }),
+        { 
+          status: 400, 
+          headers: { 
+            'Content-Type': 'application/json',
+            'X-Content-Type-Options': 'nosniff',
+          } 
+        }
+      );
+    }
+
+    const { scenario } = valRes.data;
 
     // Log the incident
     addIncident({

@@ -3,14 +3,13 @@ import { streamText, convertToModelMessages } from 'ai';
 import { getSystemPrompt } from '@/lib/agents/system-prompts';
 import type { AgentId } from '@/lib/agents/types';
 import { generateGateDensities, getClosedGates } from '@/lib/mock-data-generator';
+import { secureRouteHandler } from '@/lib/security/secure-route';
 import gatesData from '@/data/gates.json';
 import sectorsData from '@/data/sectors.json';
 import fansData from '@/data/fans.json';
 
 export async function POST(req: Request) {
-  try {
-    const { messages, agentId, fanId, stadiumId } = await req.json();
-
+  return secureRouteHandler(req, async ({ messages, fanId, stadiumId }) => {
     const sid = stadiumId || 'stad_nyc';
     const fan = fansData.find((f) => f.id === fanId) || fansData[0];
     const gates = gatesData.filter((g) => g.stadium_id === sid);
@@ -25,7 +24,6 @@ SECTORS: ${JSON.stringify(sectors)}
 CLOSED GATES: ${closedGates.length > 0 ? closedGates.join(', ') : 'None'}
 `;
 
-    const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
     const systemPrompt = getSystemPrompt('compass' as AgentId, context);
 
     const result = streamText({
@@ -35,11 +33,5 @@ CLOSED GATES: ${closedGates.length > 0 ? closedGates.join(', ') : 'None'}
     });
 
     return result.toUIMessageStreamResponse();
-  } catch (error) {
-    console.error('Compass route error:', error);
-    return new Response(
-      JSON.stringify({ error: 'Failed to process request. Please check your API key.' }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
-    );
-  }
+  });
 }

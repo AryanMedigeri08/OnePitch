@@ -2,10 +2,10 @@ import { getModelWithFallback } from '@/lib/agents/fallback-model';
 import { streamText, generateText, convertToModelMessages } from 'ai';
 import { getSystemPrompt } from '@/lib/agents/system-prompts';
 import { generateSustainabilityReadings } from '@/lib/mock-data-generator';
+import { secureRouteHandler } from '@/lib/security/secure-route';
 
 export async function POST(req: Request) {
-  try {
-    const { messages, stadiumId, mode, image } = await req.json();
+  return secureRouteHandler(req, async ({ messages, stadiumId, mode, image }) => {
     const sid = stadiumId || 'stad_nyc';
     const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
 
@@ -56,11 +56,5 @@ SUSTAINABILITY DATA: ${JSON.stringify(sustainability)}
     });
 
     return result.toUIMessageStreamResponse();
-  } catch (error) {
-    console.error('GreenGoal error:', error);
-    return new Response(
-      JSON.stringify({ error: 'Failed to process request' }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
-    );
-  }
+  });
 }

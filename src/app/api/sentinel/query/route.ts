@@ -2,10 +2,10 @@ import { getModelWithFallback } from '@/lib/agents/fallback-model';
 import { streamText, convertToModelMessages } from 'ai';
 import { getSystemPrompt } from '@/lib/agents/system-prompts';
 import { generateGateDensities, getIncidents } from '@/lib/mock-data-generator';
+import { secureRouteHandler } from '@/lib/security/secure-route';
 
 export async function POST(req: Request) {
-  try {
-    const { messages, stadiumId } = await req.json();
+  return secureRouteHandler(req, async ({ messages, stadiumId }) => {
     const sid = stadiumId || 'stad_nyc';
     const densities = generateGateDensities(sid);
     const incidents = getIncidents();
@@ -19,7 +19,6 @@ ACTIVE INCIDENTS: ${incidents.length > 0 ? JSON.stringify(incidents.slice(0, 5))
 DENSITY THRESHOLDS: Green (<50%), Yellow (50-70%), Orange (70-85%), Red (>85%)
 `;
 
-    const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
     const systemPrompt = getSystemPrompt('sentinel', context);
 
     const result = streamText({
@@ -29,11 +28,5 @@ DENSITY THRESHOLDS: Green (<50%), Yellow (50-70%), Orange (70-85%), Red (>85%)
     });
 
     return result.toUIMessageStreamResponse();
-  } catch (error) {
-    console.error('Sentinel query error:', error);
-    return new Response(
-      JSON.stringify({ error: 'Failed to process query' }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
-    );
-  }
+  });
 }
