@@ -75,6 +75,59 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* FWC 2026 Challenge & Problem Alignment Section */}
+        <section className="py-16 bg-white border-b border-gray-100">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+                Aligning AI with the FWC 2026 Operational Challenge
+              </h2>
+              <p className="mt-3 text-lg text-gray-500">
+                The FIFA World Cup 2026 spans 3 countries, 48 teams, and 104 matches. OnePitch AI maps direct operational solutions to the tournament's core logistical bottlenecks.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+              <div className="bg-gradient-to-br from-brand-navy to-brand-navy-light rounded-2xl p-8 text-white flex flex-col justify-between border border-brand-navy-mid shadow-xl">
+                <div>
+                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-brand-crimson/25 text-brand-crimson border border-brand-crimson/30">
+                    FWC 2026 Logistics Bottleneck
+                  </span>
+                  <h3 className="text-xl font-bold mt-4 mb-2">The Operational Complexity</h3>
+                  <p className="text-sm text-gray-300 leading-relaxed mb-4">
+                    Managing millions of fans across transit hubs, airport connections, security checkpoints, and accessible stadium seating presents unprecedented scaling problems. Outages, weather surges, and crowd bottlenecks demand instant, coordinated, multi-system responses.
+                  </p>
+                </div>
+                <div className="border-t border-brand-navy-mid pt-4 mt-4">
+                  <div className="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-2">Operational Goals Addressed:</div>
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    <span className="flex items-center gap-1.5"><span className="text-brand-green">✓</span> Wayfinding Navigation</span>
+                    <span className="flex items-center gap-1.5"><span className="text-brand-green">✓</span> Transit Routing</span>
+                    <span className="flex items-center gap-1.5"><span className="text-brand-green">✓</span> Accessible Concierge</span>
+                    <span className="flex items-center gap-1.5"><span className="text-brand-green">✓</span> Sustainability Monitoring</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 flex flex-col justify-between shadow-sm">
+                <div>
+                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-brand-green/10 text-brand-green border border-brand-green/20">
+                    The OnePitch AI Solution
+                  </span>
+                  <h3 className="text-xl font-bold text-gray-900 mt-4 mb-2">Multi-Agent Intelligent Sync</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                    Instead of siloed apps, OnePitch orchestrates 6 specialized, cooperative AI agents. In a weather event or medical crisis, agents automatically pass context horizontally (e.g., closing a gate instantly re-routes transit arrivals, dispatches accessible volunteers, and cuts power in closed zones).
+                  </p>
+                </div>
+                <div className="border-t border-gray-200 pt-4 mt-4 flex items-center justify-between text-xs text-gray-500">
+                  <span>Coordinated Agent Ecosystem</span>
+                  <span className="font-semibold text-brand-navy font-mono">6 Agents • Real-Time Fallbacks</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Featured Agents Section */}
         <section className="py-16 sm:py-24 bg-gray-50">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -2,6 +2,21 @@
 
 > AI-powered operations intelligence for FWC 2026 — from crowd safety to sustainability, all orchestrated in real-time.
 
+## 🎯 FIFA World Cup 2026 Challenge & Problem Statement Alignment
+
+OnePitch is built directly in alignment with the core challenges of **FIFA World Cup 2026** (48 teams, 104 matches, millions of fans). Managing multi-venue crowd flow, transit bottlenecks, diverse accessibility needs, volunteer burnout, and sustainability reporting demands a coordinated ecosystem. 
+
+### How OnePitch Maps to the Challenge
+
+- **Wayfinding & Navigation**: `Compass` dynamically calculates walking routes inside MetLife Stadium, instantly rerouting fans if gates close or security perimeters shift.
+- **Crowd Management**: `Sentinel` monitors live gate densities, warns operations staff of critical surges (>90%), and auto-generates structured dispatcher radio scripts.
+- **Accessibility & Inclusion**: `AccessAll` maps step-free pathways for mobility-impaired fans, coordinates sensor-quiet routes, and auto-dispatches nearby volunteers.
+- **Transportation & Logistics**: `TransitFlow` generates multi-leg transit itineraries (Walk → Metro → Shuttle → Gate) with fallback routing and handles cross-border checkpoint checklists.
+- **Tournament Sustainability**: `GreenGoal` features a real-time vision-based waste scanner (compost vs. recycle vs. landfill classification via Gemini Vision) and builds live ESG carbon footprint reports.
+- **Volunteer Orchestration**: `VolunteerOS` tracks shifts, monitors volunteer sentiment (flagging fatigue for ops command), and structures handoff logs for consecutive shifts.
+
+---
+
 ## 🏗️ Architecture
 
 ```
