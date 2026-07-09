@@ -33,7 +33,7 @@ INSTRUCTIONS: Build a multi-leg itinerary (Walk → Transit → Shuttle → Gate
     const result = streamText({
       model: getModelWithFallback(),
       system: systemPrompt,
-      messages: await convertToModelMessages(messages),
+      messages: await convertToModelMessages(messages as any),
     });
 
     return result.toUIMessageStreamResponse();

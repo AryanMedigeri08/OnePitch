@@ -1,3 +1,9 @@
+export interface SecureMessage {
+  role: 'user' | 'assistant' | 'system';
+  content?: string;
+  parts?: unknown[];
+}
+
 export interface ValidationError {
   field: string;
   message: string;
@@ -24,8 +30,8 @@ export function sanitizeString(val: string, maxLength = 2000): string {
 /**
  * Validates chat request payloads
  */
-export function validateChatRequest(body: any): ValidationResult<{
-  messages: any[];
+export function validateChatRequest(body: unknown): ValidationResult<{
+  messages: SecureMessage[];
   fanId?: string;
   volunteerId?: string;
   stadiumId?: string;
@@ -44,29 +50,32 @@ export function validateChatRequest(body: any): ValidationResult<{
     };
   }
 
+  const obj = body as Record<string, unknown>;
+
   // Validate messages
-  if (!('messages' in body)) {
+  if (!('messages' in obj)) {
     errors.push({ field: 'messages', message: 'messages field is required' });
-  } else if (!Array.isArray(body.messages)) {
+  } else if (!Array.isArray(obj.messages)) {
     errors.push({ field: 'messages', message: 'messages must be an array' });
   } else {
     // Validate each message structure to prevent malformed injections
-    body.messages.forEach((msg: any, i: number) => {
+    (obj.messages as unknown[]).forEach((msg: unknown, i: number) => {
       if (!msg || typeof msg !== 'object') {
         errors.push({ field: `messages[${i}]`, message: 'message must be an object' });
         return;
       }
-      if (typeof msg.role !== 'string' || !['user', 'assistant', 'system'].includes(msg.role)) {
+      const msgObj = msg as Record<string, unknown>;
+      if (typeof msgObj.role !== 'string' || !['user', 'assistant', 'system'].includes(msgObj.role)) {
         errors.push({
           field: `messages[${i}].role`,
           message: 'role must be user, assistant, or system',
         });
       }
       // Vercel AI SDK messages can have content or parts
-      if ('content' in msg && typeof msg.content !== 'string') {
+      if ('content' in msgObj && typeof msgObj.content !== 'string') {
         errors.push({ field: `messages[${i}].content`, message: 'content must be a string' });
       }
-      if ('parts' in msg && !Array.isArray(msg.parts)) {
+      if ('parts' in msgObj && !Array.isArray(msgObj.parts)) {
         errors.push({ field: `messages[${i}].parts`, message: 'parts must be an array' });
       }
     });
@@ -74,10 +83,10 @@ export function validateChatRequest(body: any): ValidationResult<{
 
   // Optional string validation with length capping
   const checkOptionalString = (field: string, maxLen = 500) => {
-    if (field in body && body[field] !== undefined && body[field] !== null) {
-      if (typeof body[field] !== 'string') {
+    if (field in obj && obj[field] !== undefined && obj[field] !== null) {
+      if (typeof obj[field] !== 'string') {
         errors.push({ field, message: `${field} must be a string` });
-      } else if (body[field].length > maxLen) {
+      } else if ((obj[field] as string).length > maxLen) {
         errors.push({ field, message: `${field} length exceeds ${maxLen} limit` });
       }
     }
@@ -92,11 +101,11 @@ export function validateChatRequest(body: any): ValidationResult<{
   checkOptionalString('image', 10 * 1024 * 1024); // Support base64 image strings up to 10MB
 
   // Needs validation
-  if ('needs' in body && body.needs !== undefined && body.needs !== null) {
-    if (!Array.isArray(body.needs)) {
+  if ('needs' in obj && obj.needs !== undefined && obj.needs !== null) {
+    if (!Array.isArray(obj.needs)) {
       errors.push({ field: 'needs', message: 'needs must be an array of strings' });
     } else {
-      body.needs.forEach((need: any, i: number) => {
+      (obj.needs as unknown[]).forEach((need: unknown, i: number) => {
         if (typeof need !== 'string') {
           errors.push({ field: `needs[${i}]`, message: 'each accessibility need must be a string' });
         }
@@ -112,15 +121,15 @@ export function validateChatRequest(body: any): ValidationResult<{
   return {
     success: true,
     data: {
-      messages: body.messages,
-      fanId: body.fanId ? sanitizeString(body.fanId, 100) : undefined,
-      volunteerId: body.volunteerId ? sanitizeString(body.volunteerId, 100) : undefined,
-      stadiumId: body.stadiumId ? sanitizeString(body.stadiumId, 100) : undefined,
-      mode: body.mode ? sanitizeString(body.mode, 50) : undefined,
-      needs: body.needs ? body.needs.map((n: string) => sanitizeString(n, 100)) : undefined,
-      origin: body.origin ? sanitizeString(body.origin, 200) : undefined,
-      kickoffTime: body.kickoffTime ? sanitizeString(body.kickoffTime, 10) : undefined,
-      image: body.image, // Base64 raw image
+      messages: obj.messages as SecureMessage[],
+      fanId: obj.fanId ? sanitizeString(obj.fanId as string, 100) : undefined,
+      volunteerId: obj.volunteerId ? sanitizeString(obj.volunteerId as string, 100) : undefined,
+      stadiumId: obj.stadiumId ? sanitizeString(obj.stadiumId as string, 100) : undefined,
+      mode: obj.mode ? sanitizeString(obj.mode as string, 50) : undefined,
+      needs: obj.needs ? (obj.needs as string[]).map((n: string) => sanitizeString(n, 100)) : undefined,
+      origin: obj.origin ? sanitizeString(obj.origin as string, 200) : undefined,
+      kickoffTime: obj.kickoffTime ? sanitizeString(obj.kickoffTime as string, 10) : undefined,
+      image: obj.image as string | undefined, // Base64 raw image
     },
   };
 }
@@ -128,7 +137,7 @@ export function validateChatRequest(body: any): ValidationResult<{
 /**
  * Validates scenario trigger payloads
  */
-export function validateScenarioRequest(body: any): ValidationResult<{ scenario: string }> {
+export function validateScenarioRequest(body: unknown): ValidationResult<{ scenario: string }> {
   if (!body || typeof body !== 'object') {
     return {
       success: false,
@@ -136,14 +145,16 @@ export function validateScenarioRequest(body: any): ValidationResult<{ scenario:
     };
   }
 
-  if (!('scenario' in body)) {
+  const obj = body as Record<string, unknown>;
+
+  if (!('scenario' in obj)) {
     return {
       success: false,
       errors: [{ field: 'scenario', message: 'scenario field is required' }],
     };
   }
 
-  if (typeof body.scenario !== 'string') {
+  if (typeof obj.scenario !== 'string') {
     return {
       success: false,
       errors: [{ field: 'scenario', message: 'scenario must be a string' }],
@@ -151,7 +162,7 @@ export function validateScenarioRequest(body: any): ValidationResult<{ scenario:
   }
 
   const allowed = ['thunderstorm', 'medical', 'vip'];
-  if (!allowed.includes(body.scenario)) {
+  if (!allowed.includes(obj.scenario)) {
     return {
       success: false,
       errors: [
@@ -166,7 +177,7 @@ export function validateScenarioRequest(body: any): ValidationResult<{ scenario:
   return {
     success: true,
     data: {
-      scenario: body.scenario,
+      scenario: obj.scenario,
     },
   };
 }
@@ -174,7 +185,7 @@ export function validateScenarioRequest(body: any): ValidationResult<{ scenario:
 /**
  * Validates reroute request payloads
  */
-export function validateRerouteRequest(body: any): ValidationResult<{
+export function validateRerouteRequest(body: unknown): ValidationResult<{
   gateId: string;
   action: 'open' | 'close';
 }> {
@@ -187,15 +198,17 @@ export function validateRerouteRequest(body: any): ValidationResult<{
     };
   }
 
-  if (!('gateId' in body)) {
+  const obj = body as Record<string, unknown>;
+
+  if (!('gateId' in obj)) {
     errors.push({ field: 'gateId', message: 'gateId field is required' });
-  } else if (typeof body.gateId !== 'string') {
+  } else if (typeof obj.gateId !== 'string') {
     errors.push({ field: 'gateId', message: 'gateId must be a string' });
   }
 
-  if (!('action' in body)) {
+  if (!('action' in obj)) {
     errors.push({ field: 'action', message: 'action field is required' });
-  } else if (body.action !== 'open' && body.action !== 'close') {
+  } else if (obj.action !== 'open' && obj.action !== 'close') {
     errors.push({ field: 'action', message: "action must be either 'open' or 'close'" });
   }
 
@@ -206,8 +219,8 @@ export function validateRerouteRequest(body: any): ValidationResult<{
   return {
     success: true,
     data: {
-      gateId: sanitizeString(body.gateId, 100),
-      action: body.action as 'open' | 'close',
+      gateId: sanitizeString(obj.gateId as string, 100),
+      action: obj.action as 'open' | 'close',
     },
   };
 }

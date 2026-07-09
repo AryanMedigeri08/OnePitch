@@ -2,7 +2,7 @@ import { getModelWithFallback } from '@/lib/agents/fallback-model';
 import { streamText, convertToModelMessages } from 'ai';
 import { getSystemPrompt } from '@/lib/agents/system-prompts';
 import type { AgentId } from '@/lib/agents/types';
-import { generateGateDensities, getClosedGates } from '@/lib/mock-data-generator';
+import { getClosedGates } from '@/lib/mock-data-generator';
 import { secureRouteHandler } from '@/lib/security/secure-route';
 import gatesData from '@/data/gates.json';
 import sectorsData from '@/data/sectors.json';
@@ -29,7 +29,7 @@ CLOSED GATES: ${closedGates.length > 0 ? closedGates.join(', ') : 'None'}
     const result = streamText({
       model: getModelWithFallback(),
       system: systemPrompt,
-      messages: await convertToModelMessages(messages),
+      messages: await convertToModelMessages(messages as any),
     });
 
     return result.toUIMessageStreamResponse();

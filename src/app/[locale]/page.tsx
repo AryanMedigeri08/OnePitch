@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Navbar } from '@/components/navbar';
-import { ArrowRight, Shield, Navigation, Leaf, Zap, Users, Train } from 'lucide-react';
+import { ArrowRight, Shield, Navigation, Leaf } from 'lucide-react';
 import { AGENTS, type AgentId } from '@/lib/agents/types';
 
 const FEATURE_ICONS: Record<string, React.ReactNode> = {
@@ -110,6 +110,7 @@ export default function LandingPage() {
                     <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-brand-crimson" /> Transit Gridlocks</span>
                     <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-brand-crimson" /> Accessibility Gaps</span>
                     <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-brand-crimson" /> Volunteer Fatigue</span>
+                    <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-brand-crimson" /> Language Barriers</span>
                   </div>
                 </div>
               </div>
@@ -126,9 +127,15 @@ export default function LandingPage() {
                     6 specialized AI agents running on a shared real-time status layer. An incident logged by one agent cascades down to the rest, automatically adjusting walking signs, transit schedules, and emergency response teams.
                   </p>
                 </div>
-                <div className="border-t border-brand-navy-mid/60 pt-6 mt-8 flex items-center justify-between text-xs text-gray-500">
-                  <span>Coordinated Ecosystem</span>
-                  <span className="font-semibold text-brand-green font-mono uppercase tracking-wider">6 Connected Agents</span>
+                <div className="border-t border-brand-navy-mid/60 pt-6 mt-8">
+                  <div className="text-xs text-gray-400 font-mono uppercase tracking-wider mb-3">Key Solutions:</div>
+                  <div className="grid grid-cols-2 gap-y-2 gap-x-4 text-xs text-gray-200">
+                    <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-brand-green" /> Smart Wayfinding</span>
+                    <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-brand-green" /> Real-time Crowd Flow</span>
+                    <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-brand-green" /> Inclusive Paths</span>
+                    <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-brand-green" /> Multilingual Assist</span>
+                    <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-brand-green" /> Active GreenGoal BMS</span>
+                  </div>
                 </div>
               </div>
             </div>

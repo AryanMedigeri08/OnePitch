@@ -121,5 +121,6 @@ ${context || 'No additional context provided.'}
 IMPORTANT: All volunteer data is synthetic. This is a demo platform showcasing how AI can support large-scale volunteer coordination.`,
   };
 
-  return prompts[agentId];
+  const commonInstruction = `\n\nMULTILINGUAL ASSISTANCE: Converse fluently in the user's language (English, Spanish, or French). Always detect and respond in the same language the user uses to ensure fully accessible multilingual support during the FIFA World Cup 2026.`;
+  return prompts[agentId] + commonInstruction;
 }

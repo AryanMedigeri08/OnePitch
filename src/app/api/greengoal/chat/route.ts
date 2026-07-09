@@ -52,7 +52,7 @@ SUSTAINABILITY DATA: ${JSON.stringify(sustainability)}
     const result = streamText({
       model: getModelWithFallback(),
       system: systemPrompt,
-      messages: await convertToModelMessages(messages),
+      messages: await convertToModelMessages(messages as any),
     });
 
     return result.toUIMessageStreamResponse();

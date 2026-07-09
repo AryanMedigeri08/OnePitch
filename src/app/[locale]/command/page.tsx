@@ -7,13 +7,13 @@ import { AgentChat } from '@/components/agent-chat';
 import { StadiumMap } from '@/components/stadium-map';
 import { CascadeTimeline } from '@/components/cascade-timeline';
 import {
-  Shield, Zap, Activity, FileText, CloudLightning, Ambulance, Lock,
+  Shield, Zap, Activity, CloudLightning, Ambulance, Lock,
   Loader2, RefreshCw, BarChart3
 } from 'lucide-react';
 import type { GateDensity } from '@/lib/mock-data-generator';
 import type { CascadeEvent, ScenarioType } from '@/lib/agents/types';
 import { SCENARIOS } from '@/lib/agents/types';
-import { getDensityColor, getDensityLabel } from '@/lib/utils';
+import { getDensityColor } from '@/lib/utils';
 
 const SCENARIO_ICONS: Record<ScenarioType, React.ReactNode> = {
   thunderstorm: <CloudLightning size={16} />,

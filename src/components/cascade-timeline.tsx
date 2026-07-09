@@ -1,6 +1,6 @@
 'use client';
 
-import { AGENTS, type CascadeEvent } from '@/lib/agents/types';
+import type { CascadeEvent } from '@/lib/agents/types';
 
 interface CascadeTimelineProps {
   events: CascadeEvent[];

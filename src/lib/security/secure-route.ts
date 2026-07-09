@@ -1,9 +1,8 @@
-import { NextResponse } from 'next/server';
 import { rateLimit } from './rate-limiter';
-import { validateChatRequest, sanitizeString } from './input-validator';
+import { validateChatRequest, type SecureMessage } from './input-validator';
 
 export interface SecureRouteContext {
-  messages: any[];
+  messages: SecureMessage[];
   fanId?: string;
   volunteerId?: string;
   stadiumId?: string;
@@ -45,7 +44,7 @@ export async function secureRouteHandler(
     }
 
     // 2. Body Validation
-    let body: any;
+    let body: unknown;
     try {
       body = await req.json();
     } catch {

@@ -14,8 +14,9 @@ const rateLimitMap = new Map<string, RateLimitWindow>();
 // Clean up old entries every 5 minutes to prevent memory leaks
 if (typeof globalThis !== 'undefined') {
   const intervalId = 'rateLimitCleanupInterval';
-  if (!(globalThis as any)[intervalId]) {
-    (globalThis as any)[intervalId] = setInterval(() => {
+  const globalRecord = globalThis as unknown as Record<string, unknown>;
+  if (!globalRecord[intervalId]) {
+    globalRecord[intervalId] = setInterval(() => {
       const now = Date.now();
       for (const [key, window] of rateLimitMap.entries()) {
         const validTimestamps = window.timestamps.filter((ts) => now - ts < 60000);

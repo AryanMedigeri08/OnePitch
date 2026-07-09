@@ -24,7 +24,7 @@ DENSITY THRESHOLDS: Green (<50%), Yellow (50-70%), Orange (70-85%), Red (>85%)
     const result = streamText({
       model: getModelWithFallback(),
       system: systemPrompt,
-      messages: await convertToModelMessages(messages),
+      messages: await convertToModelMessages(messages as any),
     });
 
     return result.toUIMessageStreamResponse();

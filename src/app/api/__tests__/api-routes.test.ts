@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { GET as getDensity } from '../sentinel/density/route';
 import { POST as triggerScenario } from '../scenario/trigger/route';
 

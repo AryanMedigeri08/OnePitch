@@ -38,7 +38,7 @@ export interface Incident {
 
 // In-memory state
 let incidentLog: Incident[] = [];
-let closedGates: Set<string> = new Set();
+const closedGates: Set<string> = new Set();
 
 // Generate a random float in range
 function randFloat(min: number, max: number): number {
