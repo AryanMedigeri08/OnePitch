@@ -1,115 +1,169 @@
-# OnePitch AI — Multi-Agent GenAI Operations Platform
+# OnePitch AI
 
-> AI-powered operations intelligence for FWC 2026 — from crowd safety to sustainability, all orchestrated in real-time.
+Multi-agent GenAI operations intelligence for the FIFA World Cup 2026.
 
-## 🎯 FIFA World Cup 2026 Challenge & Problem Statement Alignment
+OnePitch helps stadium teams, fans, volunteers, and command-center operators make faster decisions across navigation, crowd management, accessibility, transport, sustainability, multilingual assistance, and incident response.
 
-OnePitch is built directly in alignment with the core challenges of **FIFA World Cup 2026** (48 teams, 104 matches, millions of fans). Managing multi-venue crowd flow, transit bottlenecks, diverse accessibility needs, volunteer burnout, and sustainability reporting demands a coordinated ecosystem. 
+## Problem Alignment
 
-### How OnePitch Maps to the Challenge
+The FIFA World Cup 2026 expands to 48 teams, 104 matches, and a much larger multi-city operating footprint. Stadium operations need coordinated, real-time support for crowd surges, gate closures, accessibility requests, transit bottlenecks, multilingual fan needs, volunteer fatigue, and sustainability reporting.
 
-- **Wayfinding & Navigation**: `Compass` dynamically calculates walking routes inside MetLife Stadium, instantly rerouting fans if gates close or security perimeters shift.
-- **Crowd Management**: `Sentinel` monitors live gate densities, warns operations staff of critical surges (>90%), and auto-generates structured dispatcher radio scripts.
-- **Accessibility & Inclusion**: `AccessAll` maps step-free pathways for mobility-impaired fans, coordinates sensor-quiet routes, and auto-dispatches nearby volunteers.
-- **Transportation & Logistics**: `TransitFlow` generates multi-leg transit itineraries (Walk → Metro → Shuttle → Gate) with fallback routing and handles cross-border checkpoint checklists.
-- **Tournament Sustainability**: `GreenGoal` features a real-time vision-based waste scanner (compost vs. recycle vs. landfill classification via Gemini Vision) and builds live ESG carbon footprint reports.
-- **Volunteer Orchestration**: `VolunteerOS` tracks shifts, monitors volunteer sentiment (flagging fatigue for ops command), and structures handoff logs for consecutive shifts.
+OnePitch addresses that brief with six specialized AI agents connected through a shared simulated venue status layer:
 
----
+| Challenge area | OnePitch response |
+| --- | --- |
+| Navigation and wayfinding | Compass gives step-by-step stadium directions and reroutes fans when gates close. |
+| Crowd management | Sentinel analyzes gate density, flags bottlenecks, and drafts dispatch scripts. |
+| Accessibility | AccessAll creates step-free match-day plans and matches fans with trained volunteers. |
+| Transportation | TransitFlow builds multi-leg itineraries with primary and fallback options. |
+| Sustainability | GreenGoal classifies waste images, recommends carbon reductions, and drafts ESG summaries. |
+| Volunteer operations | VolunteerOS supports shift info, sentiment checks, micro-training, and handoff notes. |
+| Real-time decision support | The scenario simulator streams cross-agent cascades for weather, medical, and security events. |
+| Multilingual assistance | Agent prompts and UI support English, Spanish, and French workflows. |
 
-## 🏗️ Architecture
+## Main Experiences
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    Next.js 15 App                        │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────┐  │
-│  │ Landing   │  │ Fan App  │  │Volunteer │  │Command │  │
-│  │ Page      │  │  Page    │  │  View    │  │Center  │  │
-│  └──────────┘  └──────────┘  └──────────┘  └────────┘  │
-│                       │                                  │
-│  ┌──────────────────────────────────────────────────┐   │
-│  │              API Route Handlers                   │   │
-│  │  /compass  /sentinel  /accessall  /transitflow   │   │
-│  │  /greengoal  /volunteeros  /scenario/trigger      │   │
-│  └──────────────────────────────────────────────────┘   │
-│                       │                                  │
-│  ┌──────────────────────────────────────────────────┐   │
-│  │           Agent System (TypeScript)               │   │
-│  │  6 System Prompts → Vercel AI SDK → Gemini API   │   │
-│  └──────────────────────────────────────────────────┘   │
-│                       │                                  │
-│  ┌──────────────────────────────────────────────────┐   │
-│  │        Mock Data Layer (In-Memory JSON)           │   │
-│  │  Stadiums │ Gates │ Sectors │ Transit │ Volunteers│   │
-│  │  Fans │ Sustainability │ Incidents │ Gate State   │   │
-│  └──────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────┘
-                       │
-                 Gemini API
-            (gemini-2.0-flash)
-```
+- Landing page: challenge narrative, agent overview, and demo entry points.
+- Fan app: Compass, AccessAll, TransitFlow, and GreenGoal tools for match-day support.
+- Volunteer dashboard: shift sync, sentiment pulse, and structured handoff generation.
+- Command center: live gate-density map, Sentinel natural-language query, ESG chat, and scenario simulator.
 
-## 🎯 What's Real vs. Mocked
+Localized routes are served under:
 
-| Feature | Real / Mocked |
-|---------|--------------|
-| LLM responses (all 6 agents) | ✅ **Real** — live Gemini API calls with streaming |
-| Waste scanner (image classification) | ✅ **Real** — Gemini vision API |
-| i18n (EN/ES/FR) | ✅ **Real** — functional `next-intl` translations |
-| Gate density data | 🔶 **Mocked** — random fluctuation around base values |
-| Stadium/sector/transit data | 🔶 **Mocked** — static JSON seed files |
-| Volunteer/fan profiles | 🔶 **Mocked** — synthetic personas |
-| Sustainability meters | 🔶 **Mocked** — time-series with random variation |
-| Scenario cascades | 🔶 **Mocked** — pre-scripted events via SSE |
-| Authentication | ❌ **Not implemented** — simple role switcher |
-| Real transit APIs / GTFS | ❌ **Out of scope** |
-| Real CCTV / IoT sensors | ❌ **Out of scope** |
-| AR / camera overlay | ❌ **Out of scope** — 2D SVG map instead |
+- `/en`
+- `/es`
+- `/fr`
 
-## 🚀 Quick Start
+Example pages:
+
+- `/en/fan`
+- `/en/volunteer`
+- `/en/command`
+
+## Agent System
+
+| Agent | Surface | Purpose |
+| --- | --- | --- |
+| Compass | Fan app | Navigation, accessible routing, gate rerouting, walking-time estimates. |
+| Sentinel | Command center | Crowd-density analysis, warnings, action recommendations, dispatch scripts. |
+| AccessAll | Fan app | Accessibility profiles, match-day plans, volunteer matching, staff training. |
+| TransitFlow | Fan app | Hotel-to-stadium itineraries, fallback routes, illustrative cross-border checklists. |
+| GreenGoal | Fan app and command center | Waste classification, carbon copilot, ESG reporting. |
+| VolunteerOS | Volunteer dashboard | Volunteer guidance, fatigue detection, shift handoff summaries. |
+
+All agent prompts explicitly include FIFA World Cup 2026 alignment, multilingual support instructions, and synthetic-data safety boundaries.
+
+## Scenario Simulator
+
+The command center includes three server-sent-event cascade demos:
+
+1. Sudden Thunderstorm: Sentinel, TransitFlow, AccessAll, GreenGoal, and Compass coordinate covered-area rerouting.
+2. Medical Emergency: Sentinel clears a corridor, Compass calculates the route, and VolunteerOS dispatches trained volunteers.
+3. VIP Movement / Security Sweep: Sentinel triggers a targeted security perimeter, Compass reroutes only affected sections, and TransitFlow adjusts nearby pickup guidance.
+
+## What Is Real vs Simulated
+
+| Feature | Status |
+| --- | --- |
+| LLM chat responses | Real API-backed streaming through Vercel AI SDK. |
+| Gemini primary model | Real when `GOOGLE_GENERATIVE_AI_API_KEY` is configured. |
+| Groq fallback model | Real when `GROQ_API_KEY` is configured. |
+| GreenGoal image classification | Real vision call when Gemini is configured. |
+| English, Spanish, French localization | Real `next-intl` locale routing and message files. |
+| Gate densities | Simulated from JSON seed data with live fluctuation. |
+| Stadium, sector, transit, fan, volunteer, sustainability data | Simulated JSON seed data. |
+| Scenario cascades | Simulated scripted operations events streamed over SSE. |
+| Authentication | Not implemented; this is a hackathon showcase/demo. |
+| Real transit feeds, CCTV, IoT, ticketing, or venue systems | Not connected. |
+
+## Tech Stack
+
+- Next.js 15.5.19 App Router
+- React 19.2.4
+- TypeScript
+- Tailwind CSS v4
+- Vercel AI SDK 7
+- `@ai-sdk/google` for Gemini
+- `@ai-sdk/groq` fallback model support
+- `next-intl` 4.13.1 for locale routing and translations
+- Vitest and Testing Library
+- ESLint 9 with strict TypeScript checks
+
+Security-related dependency state:
+
+- `npm audit` passes with 0 vulnerabilities.
+- `postcss` is overridden to `8.5.16` to avoid the vulnerable transitive version bundled under Next.
+- `next` is pinned to `15.5.19` because `15.5.20` introduced a production-build regression in this project.
+
+## Setup
 
 ```bash
 npm install
 cp .env.local.example .env.local
-# Add your GOOGLE_GENERATIVE_AI_API_KEY and GROQ_API_KEY
 npm run dev
 ```
 
-## 📱 Pages
+Add API keys to `.env.local`:
 
-1. **Landing** (`/`) — Pitch narrative, featured agents, "View Live Demo" CTA
-2. **Fan App** (`/fan`) — Compass chat, AccessAll, TransitFlow, GreenGoal scanner
-3. **Volunteer** (`/volunteer`) — Shift-Sync, Sentiment Pulse, Shift Handoff
-4. **Command Center** (`/command`) — Live heatmap, Sentinel NLQ, Scenario Simulator, ESG
+```bash
+GOOGLE_GENERATIVE_AI_API_KEY=your_google_key
+GROQ_API_KEY=your_groq_key
+GEMINI_MODEL=gemini-2.0-flash
+GROQ_MODEL=llama-3.3-70b-versatile
+```
 
-## 🤖 6 Agents
+The app still renders without real keys, but live model responses require at least one configured provider.
 
-| Agent | Surface | Key Feature |
-|-------|---------|-------------|
-| 🧭 Compass | Fan App | Step-by-step navigation with gate rerouting |
-| 🛡️ Sentinel | Command Center | Crowd density analysis + dispatch scripts |
-| ♿ AccessAll | Fan App | Personalized match-day plans + volunteer matching |
-| 🚇 TransitFlow | Fan App | Multi-leg itineraries + cross-border checklists |
-| 🌱 GreenGoal | Fan App + Command | Real vision waste scanner + carbon copilot + ESG |
-| 🤝 VolunteerOS | Volunteer View | Sentiment analysis + structured handoffs |
+## Scripts
 
-## 🎬 Scenario Simulator (Flagship Feature)
+```bash
+npm run dev
+npm run build
+npm run start
+npm run lint
+npm test
+npm run test:coverage
+npm audit
+```
 
-3 cross-agent cascades, each streamed as a live timeline:
-1. ⛈️ **Sudden Thunderstorm** — 6 agents coordinate indoor rerouting
-2. 🚑 **Medical Emergency** — corridor clearing + volunteer dispatch
-3. 🔒 **VIP Movement** — targeted fan rerouting (not full-stadium)
+## Verification Status
 
-## 🛠️ Tech Stack
+Latest verified gates:
 
-- **Framework**: Next.js 15 (App Router), TypeScript
-- **Styling**: Tailwind CSS v4, custom design system
-- **LLM**: Gemini API via `@ai-sdk/google`
-- **Streaming**: Vercel AI SDK (`streamText` + `useChat`)
-- **i18n**: `next-intl` (EN/ES/FR)
-- **Animations**: `framer-motion`, CSS keyframes
+```bash
+npm.cmd run build
+npm.cmd run lint
+npm.cmd test
+npx.cmd tsc --noEmit
+npm.cmd audit
+```
 
-## 📄 Documentation
+Results:
 
-- [`DECISIONS.md`](./DECISIONS.md) — All assumptions and trade-offs
-- [`DEPLOY.md`](./DEPLOY.md) — Deployment and redeploy instructions
+- Production build passes.
+- Lint passes.
+- TypeScript passes.
+- Tests pass: 100 tests across 9 test files.
+- Audit passes: 0 vulnerabilities.
+
+## Project Structure
+
+```text
+src/app/[locale]/page.tsx              Landing page
+src/app/[locale]/fan/page.tsx          Fan app
+src/app/[locale]/volunteer/page.tsx    Volunteer dashboard
+src/app/[locale]/command/page.tsx      Command center
+src/app/api/*                          Agent and simulator API routes
+src/components/*                       Shared UI components
+src/data/*                             Synthetic stadium operations data
+src/i18n/*                             next-intl routing and request config
+src/lib/agents/*                       Agent metadata, prompts, fallback model, cascades
+src/lib/security/*                     Input validation, secure route wrapper, rate limiter
+messages/*.json                        EN/ES/FR translations
+public/favicon.ico                     Static favicon
+```
+
+## Documentation
+
+- [DECISIONS.md](./DECISIONS.md): design assumptions and trade-offs.
+- [DEPLOY.md](./DEPLOY.md): deployment notes.
