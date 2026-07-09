@@ -15,11 +15,11 @@ ALL VOLUNTEERS AT STADIUM: ${JSON.stringify(volunteersData.filter((v) => v.stadi
 `;
 
     if (mode === 'checkin') {
-      context += '\nMODE: SENTIMENT PULSE — Analyze the volunteer check-in text for sentiment (Positive ✅, Neutral ➡️, Fatigue ⚠️, Negative 🔴). If fatigue/negative, flag for Command Center.';
+      context += '\nMODE: SENTIMENT PULSE - Analyze the volunteer check-in text for sentiment (Positive, Neutral, Fatigue, Negative). If fatigue/negative, flag for Command Center.';
     } else if (mode === 'handoff') {
-      context += '\nMODE: SHIFT HANDOFF — Take the free-text notes and structure them into clean bullets: Key Events, Ongoing Issues, Fan Feedback, Equipment Status, Notes for Next Shift.';
+      context += '\nMODE: SHIFT HANDOFF - Take the free-text notes and structure them into clean bullets: Key Events, Ongoing Issues, Fan Feedback, Equipment Status, Notes for Next Shift.';
     } else {
-      context += '\nMODE: GENERAL — Answer volunteer procedure questions with concise, actionable guidance.';
+      context += '\nMODE: GENERAL - Answer volunteer procedure questions with concise, actionable guidance.';
     }
 
     const systemPrompt = getSystemPrompt('volunteeros', context);
@@ -27,7 +27,7 @@ ALL VOLUNTEERS AT STADIUM: ${JSON.stringify(volunteersData.filter((v) => v.stadi
     const result = streamText({
       model: getModelWithFallback(),
       system: systemPrompt,
-      messages: await convertToModelMessages(messages as any),
+      messages: await convertToModelMessages(messages),
     });
 
     return result.toUIMessageStreamResponse();

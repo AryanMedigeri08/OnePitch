@@ -86,8 +86,7 @@ export async function POST(req: Request) {
         Connection: 'keep-alive',
       },
     });
-  } catch (error) {
-    console.error('Scenario trigger error:', error);
+  } catch {
     return new Response(
       JSON.stringify({ error: 'Failed to trigger scenario' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }

@@ -9,10 +9,11 @@ export async function POST(req: Request) {
     const sid = stadiumId || 'stad_nyc';
     const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
 
-    // Waste scanner mode — uses vision
+    // Waste scanner mode uses vision.
     if (mode === 'scan' && image) {
-      const systemPrompt = getSystemPrompt('greengoal',
-        'MODE: WASTE SCANNER — Classify the uploaded image as COMPOST 🟤, RECYCLE ♻️, or LANDFILL ⬛. Explain why in one sentence. Award GreenPoints (Compost=10, Recycle=8, Landfill=2). Be encouraging.'
+      const systemPrompt = getSystemPrompt(
+        'greengoal',
+        'MODE: WASTE SCANNER - Classify the uploaded image as COMPOST, RECYCLE, or LANDFILL. Explain why in one sentence. Award GreenPoints (Compost=10, Recycle=8, Landfill=2). Be encouraging.'
       );
 
       const result = await generateText({
@@ -23,7 +24,7 @@ export async function POST(req: Request) {
             role: 'user',
             content: [
               { type: 'text', text: 'Please classify this waste item:' },
-              { type: 'image', image: image },
+              { type: 'image', image },
             ],
           },
         ],
@@ -35,16 +36,15 @@ export async function POST(req: Request) {
       );
     }
 
-    // Carbon copilot or general chat
     const sustainability = generateSustainabilityReadings(sid);
     let context = `
 SUSTAINABILITY DATA: ${JSON.stringify(sustainability)}
 `;
 
     if (mode === 'carbon') {
-      context += '\nMODE: CARBON COPILOT — Provide 3-5 concrete energy/water/waste reduction recommendations based on the sustainability data.';
+      context += '\nMODE: CARBON COPILOT - Provide 3-5 concrete energy/water/waste reduction recommendations based on the sustainability data.';
     } else if (mode === 'esg') {
-      context += '\nMODE: ESG REPORT — Compile the sustainability data into a structured ESG summary report with sections for Energy, Water, Waste Diversion, Carbon Offsets, and Solar Generation.';
+      context += '\nMODE: ESG REPORT - Compile the sustainability data into a structured ESG summary report with sections for Energy, Water, Waste Diversion, Carbon Offsets, and Solar Generation.';
     }
 
     const systemPrompt = getSystemPrompt('greengoal', context);
@@ -52,7 +52,7 @@ SUSTAINABILITY DATA: ${JSON.stringify(sustainability)}
     const result = streamText({
       model: getModelWithFallback(),
       system: systemPrompt,
-      messages: await convertToModelMessages(messages as any),
+      messages: await convertToModelMessages(messages),
     });
 
     return result.toUIMessageStreamResponse();

@@ -22,11 +22,11 @@ AVAILABLE VOLUNTEERS: ${JSON.stringify(volunteers.filter((v) => v.status === 'av
 `;
 
     if (mode === 'assist-now') {
-      context += `\nMODE: ASSIST NOW — Find the nearest available volunteer who can help with: ${JSON.stringify(needs || fan.accessibility_needs)}. Provide their name, current post, ETA, and skills.`;
+      context += `\nMODE: ASSIST NOW - Find the nearest available volunteer who can help with: ${JSON.stringify(needs || fan.accessibility_needs)}. Provide their name, current post, ETA, and skills.`;
     } else if (mode === 'training') {
-      context += `\nMODE: STAFF MICRO-TRAINING — Provide a concise, actionable training script.`;
+      context += '\nMODE: STAFF MICRO-TRAINING - Provide a concise, actionable training script.';
     } else {
-      context += `\nMODE: GENERATE MATCH-DAY PLAN — Create a personalized, detailed match-day accessibility plan.`;
+      context += '\nMODE: GENERATE MATCH-DAY PLAN - Create a personalized, detailed match-day accessibility plan.';
     }
 
     const systemPrompt = getSystemPrompt('accessall', context);
@@ -34,7 +34,7 @@ AVAILABLE VOLUNTEERS: ${JSON.stringify(volunteers.filter((v) => v.status === 'av
     const result = streamText({
       model: getModelWithFallback(),
       system: systemPrompt,
-      messages: await convertToModelMessages(messages as any),
+      messages: await convertToModelMessages(messages),
     });
 
     return result.toUIMessageStreamResponse();

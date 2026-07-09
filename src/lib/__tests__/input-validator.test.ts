@@ -17,8 +17,8 @@ describe('sanitizeString', () => {
   });
 
   it('returns empty string for nullish values', () => {
-    expect(sanitizeString(null as any)).toBe('');
-    expect(sanitizeString(undefined as any)).toBe('');
+    expect(sanitizeString(null)).toBe('');
+    expect(sanitizeString(undefined)).toBe('');
   });
 });
 
@@ -49,6 +49,23 @@ describe('validateChatRequest', () => {
     expect(res.data?.fanId).toBe('fan-id-123'); // trimmed
     expect(res.data?.mode).toBe('assist-now');
     expect(res.data?.needs).toEqual(['wheelchair', 'sensory']);
+  });
+
+  it('accepts AI SDK text parts and sanitizes message text', () => {
+    const payload = {
+      messages: [
+        {
+          role: 'user',
+          parts: [{ type: 'text', text: '<b>show crowded gates</b>' }],
+        },
+      ],
+    };
+
+    const res = validateChatRequest(payload);
+    expect(res.success).toBe(true);
+    expect(res.data?.messages[0].parts).toEqual([
+      { type: 'text', text: '&lt;b&gt;show crowded gates&lt;/b&gt;' },
+    ]);
   });
 
   it('validates message items role and parts', () => {

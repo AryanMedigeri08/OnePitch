@@ -10,8 +10,7 @@ export async function GET(req: Request) {
     const densities = generateGateDensities(stadiumId);
 
     return NextResponse.json({ densities, timestamp: new Date().toISOString() });
-  } catch (error) {
-    console.error('Density error:', error);
+  } catch {
     return NextResponse.json({ error: 'Failed to get density data' }, { status: 500 });
   }
 }

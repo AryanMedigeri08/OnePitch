@@ -34,8 +34,8 @@ export default function CommandPage() {
       const res = await fetch('/api/sentinel/density?stadiumId=stad_nyc');
       const data = await res.json();
       setGates(data.densities || []);
-    } catch (err) {
-      console.error('Failed to fetch densities:', err);
+    } catch {
+      setGates([]);
     }
   }, []);
 
@@ -87,8 +87,7 @@ export default function CommandPage() {
           }
         }
       }
-    } catch (err) {
-      console.error('Scenario error:', err);
+    } catch {
       setRunningScenario(null);
     }
   }

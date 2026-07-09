@@ -15,17 +15,18 @@ export async function POST(req: Request) {
     let context = `
 STADIUM: ${JSON.stringify(stadium)}
 TRANSIT HUBS:
-${hubs.map((h) => `  ${h.name} (${h.type}) — Lines: ${h.lines.join(', ')} — Next departures: ${h.next_departures.join(', ')} — Walk to stadium: ${h.accessible ? h.walk_to_stadium_min : h.walk_to_stadium_min + 5} min — Accessible: ${h.accessible}`).join('\n')}
+${hubs.map((h) => `  ${h.name} (${h.type}) - Lines: ${h.lines.join(', ')} - Next departures: ${h.next_departures.join(', ')} - Walk to stadium: ${h.accessible ? h.walk_to_stadium_min : h.walk_to_stadium_min + 5} min - Accessible: ${h.accessible}`).join('\n')}
 `;
 
     if (mode === 'crossborder') {
-      context += `\nMODE: CROSS-BORDER CHECKLIST — Generate an illustrative checklist. ALWAYS include this prominent disclaimer: "⚠️ Demo content — not real travel/immigration advice."`;
+      context += '\nMODE: CROSS-BORDER CHECKLIST - Generate an illustrative checklist. ALWAYS include this prominent disclaimer: "Demo content - not real travel/immigration advice."';
     } else {
-      context += `\nMODE: ITINERARY PLANNING
+      context += `
+MODE: ITINERARY PLANNING
 ORIGIN: ${origin || 'Hotel in city center'}
 KICKOFF TIME: ${kickoffTime || '19:00'}
 ACCESSIBILITY NEEDS: ${JSON.stringify(needs || [])}
-INSTRUCTIONS: Build a multi-leg itinerary (Walk → Transit → Shuttle → Gate). Show PRIMARY route + FALLBACK. Recommend arriving 90 min before kickoff.`;
+INSTRUCTIONS: Build a multi-leg itinerary (Walk -> Transit -> Shuttle -> Gate). Show PRIMARY route + FALLBACK. Recommend arriving 90 min before kickoff.`;
     }
 
     const systemPrompt = getSystemPrompt('transitflow', context);
@@ -33,7 +34,7 @@ INSTRUCTIONS: Build a multi-leg itinerary (Walk → Transit → Shuttle → Gate
     const result = streamText({
       model: getModelWithFallback(),
       system: systemPrompt,
-      messages: await convertToModelMessages(messages as any),
+      messages: await convertToModelMessages(messages),
     });
 
     return result.toUIMessageStreamResponse();

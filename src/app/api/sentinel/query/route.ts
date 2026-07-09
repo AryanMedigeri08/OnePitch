@@ -12,7 +12,7 @@ export async function POST(req: Request) {
 
     const context = `
 CURRENT GATE DENSITIES:
-${densities.map((g) => `  ${g.name}: ${g.density_pct}% (${g.current_density_ppl_m2} ppl/m²) — Status: ${g.status}, Trend: ${g.trend}`).join('\n')}
+${densities.map((g) => `  ${g.name}: ${g.density_pct}% (${g.current_density_ppl_m2} ppl/m2) - Status: ${g.status}, Trend: ${g.trend}`).join('\n')}
 
 ACTIVE INCIDENTS: ${incidents.length > 0 ? JSON.stringify(incidents.slice(0, 5)) : 'None'}
 
@@ -24,7 +24,7 @@ DENSITY THRESHOLDS: Green (<50%), Yellow (50-70%), Orange (70-85%), Red (>85%)
     const result = streamText({
       model: getModelWithFallback(),
       system: systemPrompt,
-      messages: await convertToModelMessages(messages as any),
+      messages: await convertToModelMessages(messages),
     });
 
     return result.toUIMessageStreamResponse();

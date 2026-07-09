@@ -1,6 +1,5 @@
 import { AGENTS, type AgentId, type CascadeEvent, type ScenarioType } from './types';
 
-// Scenario cascade definitions — each scenario produces a sequence of agent events
 const SCENARIO_CASCADES: Record<ScenarioType, Array<{
   agentId: AgentId;
   delayMs: number;
@@ -12,15 +11,15 @@ const SCENARIO_CASCADES: Record<ScenarioType, Array<{
     {
       agentId: 'sentinel',
       delayMs: 0,
-      title: '⛈️ Weather Alert Received',
+      title: 'Weather Alert Received',
       messageTemplate: 'SEVERE WEATHER WARNING: Thunderstorm approaching MetLife Stadium. Lightning detected within 8km radius. Initiating weather protocol.',
       type: 'alert',
     },
     {
       agentId: 'sentinel',
       delayMs: 2000,
-      title: 'Queue Rerouting — Indoor Channels',
-      messageTemplate: 'DISPATCH: All gate marshals — redirect outdoor queues to covered concourse areas. Gate B1 outdoor queue to Tunnel 3. Gate A1 queue to North Concourse.',
+      title: 'Queue Rerouting - Indoor Channels',
+      messageTemplate: 'DISPATCH: All gate marshals - redirect outdoor queues to covered concourse areas. Gate B1 outdoor queue to Tunnel 3. Gate A1 queue to North Concourse.',
       type: 'action',
     },
     {
@@ -40,14 +39,14 @@ const SCENARIO_CASCADES: Record<ScenarioType, Array<{
     {
       agentId: 'greengoal',
       delayMs: 8000,
-      title: 'Energy Optimization — Empty Zones',
-      messageTemplate: 'HVAC reduced in evacuated outdoor hospitality zones (Zones 4, 7, 9) — estimated savings: 45 kWh/hr. Lighting maintained for safety in transition corridors. Solar panels secured.',
+      title: 'Energy Optimization - Empty Zones',
+      messageTemplate: 'HVAC reduced in evacuated outdoor hospitality zones (Zones 4, 7, 9) - estimated savings: 45 kWh/hr. Lighting maintained for safety in transition corridors. Solar panels secured.',
       type: 'info',
     },
     {
       agentId: 'compass',
       delayMs: 10000,
-      title: '📢 Fan-Facing Weather Alert Pushed',
+      title: 'Fan-Facing Weather Alert Pushed',
       messageTemplate: 'ATTENTION FANS: Due to approaching thunderstorm, please move to the nearest covered area. Follow the orange signs to covered concourses. Your seat location will be held. Estimated delay: 20 minutes.',
       type: 'action',
     },
@@ -57,7 +56,7 @@ const SCENARIO_CASCADES: Record<ScenarioType, Array<{
     {
       agentId: 'sentinel',
       delayMs: 0,
-      title: '🚑 Medical Incident Logged',
+      title: 'Medical Incident Logged',
       messageTemplate: 'MEDICAL ALERT: Incident reported in Section 105, Row 12. Type: Unresponsive fan. Medical team dispatched. Logging incident #MED-2026-0708.',
       type: 'alert',
     },
@@ -72,7 +71,7 @@ const SCENARIO_CASCADES: Record<ScenarioType, Array<{
       agentId: 'compass',
       delayMs: 4000,
       title: 'Fastest Medical Route Calculated',
-      messageTemplate: 'ROUTE: Section 105 → Aisle 12 → Corridor 3 (CLEARED) → Medical Bay North. Distance: 120m. Estimated transit time: 2 minutes with stretcher. Elevator B reserved.',
+      messageTemplate: 'ROUTE: Section 105 -> Aisle 12 -> Corridor 3 (CLEARED) -> Medical Bay North. Distance: 120m. Estimated transit time: 2 minutes with stretcher. Elevator B reserved.',
       type: 'action',
     },
     {
@@ -85,8 +84,8 @@ const SCENARIO_CASCADES: Record<ScenarioType, Array<{
     {
       agentId: 'sentinel',
       delayMs: 9000,
-      title: '📋 Incident Report Auto-Generated',
-      messageTemplate: 'INCIDENT REPORT #MED-2026-0708:\n• Location: Section 105, Row 12\n• Time: 19:05 UTC\n• Type: Medical — Unresponsive Fan\n• Response: Medical team + 2 volunteers dispatched\n• Corridor 3 cleared\n• Status: ACTIVE — awaiting medical team assessment',
+      title: 'Incident Report Auto-Generated',
+      messageTemplate: 'INCIDENT REPORT #MED-2026-0708:\n- Location: Section 105, Row 12\n- Time: 19:05 UTC\n- Type: Medical - Unresponsive Fan\n- Response: Medical team + 2 volunteers dispatched\n- Corridor 3 cleared\n- Status: ACTIVE - awaiting medical team assessment',
       type: 'resolution',
     },
   ],
@@ -95,7 +94,7 @@ const SCENARIO_CASCADES: Record<ScenarioType, Array<{
     {
       agentId: 'sentinel',
       delayMs: 0,
-      title: '🔒 Security Protocol Initiated',
+      title: 'Security Protocol Initiated',
       messageTemplate: 'SECURITY SWEEP: VIP movement through Section 300 corridor. Security perimeter established. Affects: Sections 300, 205 corridor only. NOT a full-stadium alert.',
       type: 'alert',
     },
@@ -103,7 +102,7 @@ const SCENARIO_CASCADES: Record<ScenarioType, Array<{
       agentId: 'compass',
       delayMs: 2500,
       title: 'Targeted Fan Rerouting',
-      messageTemplate: 'REROUTE (Sections 300 & 205 ONLY): Fans in affected sections — please use alternate corridor via West Concourse. Section 300 fans exit via Gate C1 instead of usual Corridor 5. This does NOT affect other sections.',
+      messageTemplate: 'REROUTE (Sections 300 & 205 ONLY): Fans in affected sections - please use alternate corridor via West Concourse. Section 300 fans exit via Gate C1 instead of usual Corridor 5. This does NOT affect other sections.',
       type: 'action',
     },
     {
@@ -116,7 +115,7 @@ const SCENARIO_CASCADES: Record<ScenarioType, Array<{
     {
       agentId: 'compass',
       delayMs: 7500,
-      title: '📢 Fan Notification — Targeted',
+      title: 'Fan Notification - Targeted',
       messageTemplate: 'NOTICE (Sections 300 & 205 only): A temporary security measure requires a brief detour. Please follow staff directions to the West Concourse. All other sections are unaffected. Thank you for your patience.',
       type: 'info',
     },

@@ -59,8 +59,7 @@ export async function POST(req: Request) {
         },
       }
     );
-  } catch (error) {
-    console.error('Reroute error:', error);
+  } catch {
     return NextResponse.json(
       { error: 'Failed to process reroute' },
       { 
@@ -72,4 +71,3 @@ export async function POST(req: Request) {
     );
   }
 }
-

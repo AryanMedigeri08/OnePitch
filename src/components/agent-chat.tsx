@@ -1,11 +1,20 @@
 'use client';
 
-import { useState, useRef, useEffect, useMemo, memo, type FormEvent } from 'react';
+import {
+  memo,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+  type ReactNode,
+} from 'react';
 import { Send, Loader2 } from 'lucide-react';
 import { useChat } from '@ai-sdk/react';
+import { DefaultChatTransport } from 'ai';
 import type { AgentId } from '@/lib/agents/types';
 import { AGENTS } from '@/lib/agents/types';
-import { DefaultChatTransport } from 'ai';
 
 interface AgentChatProps {
   agentId: AgentId;
@@ -16,22 +25,24 @@ interface AgentChatProps {
   className?: string;
 }
 
-function formatInline(text: string): React.ReactNode[] {
+function formatInline(text: string): ReactNode[] {
   const parts = text.split(/(\*\*.*?\*\*|\*.*?\*)/g);
   return parts.map((part, index) => {
     if (part.startsWith('**') && part.endsWith('**')) {
       return <strong key={index} className="font-bold">{part.slice(2, -2)}</strong>;
     }
+
     if (part.startsWith('*') && part.endsWith('*')) {
       return <strong key={index} className="font-bold">{part.slice(1, -1)}</strong>;
     }
+
     return part;
   });
 }
 
-function parseMarkdown(text: string): React.ReactNode {
+function parseMarkdown(text: string): ReactNode {
   const lines = text.split('\n');
-  const elements: React.ReactNode[] = [];
+  const elements: ReactNode[] = [];
 
   lines.forEach((line, index) => {
     const listMatch = line.match(/^\s*[-*]\s+(.*)$/);
@@ -53,6 +64,7 @@ function parseMarkdown(text: string): React.ReactNode {
       );
       return;
     }
+
     const h2Match = line.match(/^##\s+(.*)$/);
     if (h2Match) {
       elements.push(
@@ -62,6 +74,7 @@ function parseMarkdown(text: string): React.ReactNode {
       );
       return;
     }
+
     const h1Match = line.match(/^#\s+(.*)$/);
     if (h1Match) {
       elements.push(
@@ -102,30 +115,28 @@ export function AgentChat({
 }: AgentChatProps) {
   const agent = AGENTS[agentId];
   const scrollRef = useRef<HTMLDivElement>(null);
-
   const [input, setInput] = useState('');
-  const { messages, sendMessage, status, error } =
-    useChat({
-      transport: new DefaultChatTransport({
-        api: apiEndpoint,
-        body: { agentId, ...extraBody },
-      }),
-    });
+  const { messages, sendMessage, status, error } = useChat({
+    transport: new DefaultChatTransport({
+      api: apiEndpoint,
+      body: { agentId, ...extraBody },
+    }),
+  });
 
   const isLoading = status === 'submitted' || status === 'streaming';
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setInput(event.target.value);
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (!input.trim()) return;
+
     sendMessage({ text: input });
     setInput('');
   };
 
-  // Auto-scroll on new messages
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -140,19 +151,20 @@ export function AgentChat({
           : 'bg-white border-gray-200'
       } ${className}`}
     >
-      {/* Header */}
       <div
         className={`flex items-center gap-2 px-4 py-2.5 border-b ${
           isDark ? 'border-brand-navy-mid' : 'border-gray-100'
         }`}
       >
-        <span className="text-xl">{agent.icon}</span>
+        <span
+          className="h-8 min-w-8 px-2 rounded-lg flex items-center justify-center text-[10px] font-black tracking-wide"
+          style={{ background: `${agent.color}20`, color: agent.color }}
+          aria-label={`${agent.name} agent`}
+        >
+          {agent.icon}
+        </span>
         <div className="flex-1">
-          <h3
-            className={`text-sm font-semibold ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}
-          >
+          <h3 className={`text-sm font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
             {agent.name}
           </h3>
           <p className="model-tag" style={{ color: agent.color }}>
@@ -162,10 +174,10 @@ export function AgentChat({
         <div
           className="w-2 h-2 rounded-full animate-pulse-glow"
           style={{ background: agent.color }}
+          aria-hidden="true"
         />
       </div>
 
-      {/* Messages */}
       <div
         ref={scrollRef}
         role="log"
@@ -178,7 +190,13 @@ export function AgentChat({
       >
         {messages.length === 0 && (
           <div className={`text-center py-8 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
-            <span className="text-3xl block mb-2" role="img" aria-label="agent icon">{agent.icon}</span>
+            <span
+              className="mx-auto mb-2 h-10 min-w-10 px-2 rounded-xl inline-flex items-center justify-center text-[11px] font-black tracking-wide"
+              style={{ background: `${agent.color}16`, color: agent.color }}
+              aria-label={`${agent.name} agent`}
+            >
+              {agent.icon}
+            </span>
             <p className="text-sm">{agent.tagline}</p>
             <p className="text-xs mt-1 opacity-60">Ask me anything</p>
           </div>
@@ -191,9 +209,8 @@ export function AgentChat({
               msg.role === 'user' ? 'flex-row-reverse' : ''
             }`}
           >
-            {/* Avatar */}
             <div
-              className={`w-7 h-7 rounded-full flex items-center justify-center text-xs shrink-0 ${
+              className={`h-7 min-w-7 px-1.5 rounded-full flex items-center justify-center text-[9px] font-black shrink-0 ${
                 msg.role === 'user'
                   ? isDark
                     ? 'bg-brand-blue/20 text-brand-blue'
@@ -208,11 +225,11 @@ export function AgentChat({
                     }
                   : undefined
               }
+              aria-hidden="true"
             >
-              {msg.role === 'user' ? '👤' : agent.icon}
+              {msg.role === 'user' ? 'YOU' : agent.icon}
             </div>
 
-            {/* Message bubble */}
             <div
               className={`max-w-[85%] rounded-xl px-3.5 py-2.5 text-sm leading-relaxed ${
                 msg.role === 'user'
@@ -225,10 +242,11 @@ export function AgentChat({
               }`}
             >
               <div className="whitespace-pre-wrap">
-                {msg.parts.map((part, idx) => {
+                {msg.parts.map((part, index) => {
                   if (part.type === 'text') {
-                    return <div key={idx}><MarkdownMemo text={part.text} /></div>;
+                    return <div key={index}><MarkdownMemo text={part.text} /></div>;
                   }
+
                   return null;
                 })}
               </div>
@@ -241,11 +259,10 @@ export function AgentChat({
           </div>
         ))}
 
-        {/* Typing indicator */}
         {isLoading && (
           <div className="flex gap-2.5" aria-hidden="true">
             <div
-              className="w-7 h-7 rounded-full flex items-center justify-center text-xs"
+              className="h-7 min-w-7 px-1.5 rounded-full flex items-center justify-center text-[9px] font-black"
               style={{ background: `${agent.color}20`, color: agent.color }}
             >
               {agent.icon}
@@ -262,16 +279,14 @@ export function AgentChat({
           </div>
         )}
 
-        {/* Error */}
         {error && (
           <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-red-500/10 text-red-400 text-sm" role="alert">
-            <span>⚠️</span>
+            <span aria-hidden="true">!</span>
             <span>Something went wrong. Please try again.</span>
           </div>
         )}
       </div>
 
-      {/* Input */}
       <form
         onSubmit={handleSubmit}
         aria-label="Agent message input form"

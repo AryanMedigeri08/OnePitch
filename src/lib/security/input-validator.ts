@@ -1,7 +1,10 @@
+import type { UIMessage } from 'ai';
+
+type ChatRole = 'user' | 'assistant' | 'system';
+
 export interface SecureMessage {
-  role: 'user' | 'assistant' | 'system';
-  content?: string;
-  parts?: unknown[];
+  role: ChatRole;
+  parts: Omit<UIMessage, 'id'>['parts'];
 }
 
 export interface ValidationError {
@@ -18,13 +21,38 @@ export interface ValidationResult<T> {
 /**
  * Sanitizes input to prevent basic HTML/Script injection.
  */
-export function sanitizeString(val: string, maxLength = 2000): string {
-  if (!val) return '';
+export function sanitizeString(val: unknown, maxLength = 2000): string {
+  if (typeof val !== 'string' || val.length === 0) return '';
   return val
     .trim()
     .slice(0, maxLength)
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
+}
+
+function isChatRole(value: unknown): value is ChatRole {
+  return value === 'user' || value === 'assistant' || value === 'system';
+}
+
+function sanitizeMessageParts(msgObj: Record<string, unknown>): SecureMessage['parts'] {
+  if (Array.isArray(msgObj.parts)) {
+    return msgObj.parts.flatMap((part): SecureMessage['parts'] => {
+      if (!part || typeof part !== 'object') return [];
+      const partObj = part as Record<string, unknown>;
+
+      if (partObj.type === 'text' && typeof partObj.text === 'string') {
+        return [{ type: 'text', text: sanitizeString(partObj.text) }];
+      }
+
+      return [];
+    });
+  }
+
+  if (typeof msgObj.content === 'string') {
+    return [{ type: 'text', text: sanitizeString(msgObj.content) }];
+  }
+
+  return [];
 }
 
 /**
@@ -42,6 +70,7 @@ export function validateChatRequest(body: unknown): ValidationResult<{
   image?: string;
 }> {
   const errors: ValidationError[] = [];
+  const sanitizedMessages: SecureMessage[] = [];
 
   if (!body || typeof body !== 'object') {
     return {
@@ -58,26 +87,38 @@ export function validateChatRequest(body: unknown): ValidationResult<{
   } else if (!Array.isArray(obj.messages)) {
     errors.push({ field: 'messages', message: 'messages must be an array' });
   } else {
-    // Validate each message structure to prevent malformed injections
-    (obj.messages as unknown[]).forEach((msg: unknown, i: number) => {
+    obj.messages.forEach((msg: unknown, i: number) => {
       if (!msg || typeof msg !== 'object') {
         errors.push({ field: `messages[${i}]`, message: 'message must be an object' });
         return;
       }
       const msgObj = msg as Record<string, unknown>;
-      if (typeof msgObj.role !== 'string' || !['user', 'assistant', 'system'].includes(msgObj.role)) {
+      if (!isChatRole(msgObj.role)) {
         errors.push({
           field: `messages[${i}].role`,
           message: 'role must be user, assistant, or system',
         });
+        return;
       }
-      // Vercel AI SDK messages can have content or parts
-      if ('content' in msgObj && typeof msgObj.content !== 'string') {
+
+      if ('content' in msgObj && msgObj.content !== undefined && typeof msgObj.content !== 'string') {
         errors.push({ field: `messages[${i}].content`, message: 'content must be a string' });
       }
       if ('parts' in msgObj && !Array.isArray(msgObj.parts)) {
         errors.push({ field: `messages[${i}].parts`, message: 'parts must be an array' });
+        return;
       }
+
+      const parts = sanitizeMessageParts(msgObj);
+      if (parts.length === 0) {
+        errors.push({
+          field: `messages[${i}].parts`,
+          message: 'message must include at least one text part',
+        });
+        return;
+      }
+
+      sanitizedMessages.push({ role: msgObj.role, parts });
     });
   }
 
@@ -117,19 +158,23 @@ export function validateChatRequest(body: unknown): ValidationResult<{
     return { success: false, errors };
   }
 
+  const sanitizedNeeds = Array.isArray(obj.needs)
+    ? obj.needs.map((need) => sanitizeString(need, 100))
+    : undefined;
+
   // Return sanitized copy of strings
   return {
     success: true,
     data: {
-      messages: obj.messages as SecureMessage[],
-      fanId: obj.fanId ? sanitizeString(obj.fanId as string, 100) : undefined,
-      volunteerId: obj.volunteerId ? sanitizeString(obj.volunteerId as string, 100) : undefined,
-      stadiumId: obj.stadiumId ? sanitizeString(obj.stadiumId as string, 100) : undefined,
-      mode: obj.mode ? sanitizeString(obj.mode as string, 50) : undefined,
-      needs: obj.needs ? (obj.needs as string[]).map((n: string) => sanitizeString(n, 100)) : undefined,
-      origin: obj.origin ? sanitizeString(obj.origin as string, 200) : undefined,
-      kickoffTime: obj.kickoffTime ? sanitizeString(obj.kickoffTime as string, 10) : undefined,
-      image: obj.image as string | undefined, // Base64 raw image
+      messages: sanitizedMessages,
+      fanId: obj.fanId ? sanitizeString(obj.fanId, 100) : undefined,
+      volunteerId: obj.volunteerId ? sanitizeString(obj.volunteerId, 100) : undefined,
+      stadiumId: obj.stadiumId ? sanitizeString(obj.stadiumId, 100) : undefined,
+      mode: obj.mode ? sanitizeString(obj.mode, 50) : undefined,
+      needs: sanitizedNeeds,
+      origin: obj.origin ? sanitizeString(obj.origin, 200) : undefined,
+      kickoffTime: obj.kickoffTime ? sanitizeString(obj.kickoffTime, 10) : undefined,
+      image: typeof obj.image === 'string' ? obj.image : undefined, // Base64 raw image
     },
   };
 }
@@ -219,8 +264,8 @@ export function validateRerouteRequest(body: unknown): ValidationResult<{
   return {
     success: true,
     data: {
-      gateId: sanitizeString(obj.gateId as string, 100),
-      action: obj.action as 'open' | 'close',
+      gateId: sanitizeString(obj.gateId, 100),
+      action: obj.action === 'open' ? 'open' : 'close',
     },
   };
 }

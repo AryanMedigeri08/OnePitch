@@ -33,8 +33,7 @@ export function fallbackModel(
           throw new Error('Google Gemini API Key is not configured');
         }
         return await primary.doGenerate(options);
-      } catch (error) {
-        console.warn(`Primary model ${primary.modelId} generate failed, trying fallback:`, error);
+      } catch {
         return await fallback.doGenerate(options);
       }
     },
@@ -50,8 +49,7 @@ export function fallbackModel(
           throw new Error('Google Gemini API Key is not configured');
         }
         return await primary.doStream(options);
-      } catch (error) {
-        console.warn(`Primary model ${primary.modelId} stream failed, trying fallback:`, error);
+      } catch {
         return await fallback.doStream(options);
       }
     },

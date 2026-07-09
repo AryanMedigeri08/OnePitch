@@ -80,8 +80,7 @@ export async function secureRouteHandler(
     // 4. Secure Headers Addition
     response.headers.set('X-Content-Type-Options', 'nosniff');
     return response;
-  } catch (error) {
-    console.error('Secure route handler exception:', error);
+  } catch {
     return new Response(
       JSON.stringify({ error: 'An unexpected security event occurred' }),
       {
