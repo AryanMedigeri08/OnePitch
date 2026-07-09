@@ -22,7 +22,7 @@ export default function LandingPage() {
   const allAgents = Object.values(AGENTS);
 
   return (
-    <>
+    <div data-theme="dark" className="dark min-h-screen flex flex-col bg-brand-navy">
       <Navbar />
       <main className="flex-1 bg-brand-navy overflow-hidden text-white">
         {/* Hero Section */}
@@ -99,13 +99,13 @@ export default function LandingPage() {
                     The Problem
                   </span>
                   <h3 className="text-2xl font-bold mt-6 mb-3 text-white">Logistical Bottlenecks</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
+                  <p className="text-sm text-gray-300 leading-relaxed font-medium">
                     Siloed operations cause chaos during sudden emergencies. Standard alerts get ignored, transit routes clog up, and wheelchair-bound fans get stranded at gridlocked entrances.
                   </p>
                 </div>
                 <div className="border-t border-brand-navy-mid/60 pt-6 mt-8">
-                  <div className="text-xs text-gray-500 font-mono uppercase tracking-wider mb-3">Target Areas:</div>
-                  <div className="grid grid-cols-2 gap-y-2 gap-x-4 text-xs text-gray-300">
+                  <div className="text-xs text-gray-400 font-mono uppercase tracking-wider mb-3">Target Areas:</div>
+                  <div className="grid grid-cols-2 gap-y-2 gap-x-4 text-xs text-gray-200">
                     <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-brand-crimson" /> Wayfinding Detours</span>
                     <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-brand-crimson" /> Transit Gridlocks</span>
                     <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-brand-crimson" /> Accessibility Gaps</span>
@@ -122,7 +122,7 @@ export default function LandingPage() {
                     The Solution
                   </span>
                   <h3 className="text-2xl font-bold mt-6 mb-3 text-white">OnePitch Cooperative Agents</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
+                  <p className="text-sm text-gray-300 leading-relaxed font-medium">
                     6 specialized AI agents running on a shared real-time status layer. An incident logged by one agent cascades down to the rest, automatically adjusting walking signs, transit schedules, and emergency response teams.
                   </p>
                 </div>
@@ -264,6 +264,6 @@ export default function LandingPage() {
           <p className="opacity-60">All simulation parameters and logs are fully synthetic. Powered by Gemini & Groq APIs.</p>
         </div>
       </footer>
-    </>
+    </div>
   );
 }
