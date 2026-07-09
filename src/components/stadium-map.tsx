@@ -92,12 +92,22 @@ export function StadiumMap({
           const color = getDensityColor(gate.density_pct);
           const isHighlighted = highlightedGate === gate.id;
           const isClosed = gate.status === 'closed';
+          const label = `${gate.name.split('—')[0].trim()}: ${isClosed ? 'Closed' : `${gate.density_pct}% capacity`}. Accessibility: ${gate.accessible ? 'Accessible' : 'Standard'}. Click to toggle status.`;
 
           return (
             <g
               key={gate.id}
-              className="cursor-pointer transition-transform"
+              role="button"
+              tabIndex={0}
+              aria-label={label}
+              className="cursor-pointer transition-transform focus:outline-none focus:scale-110"
               onClick={() => onGateClick?.(gate.id)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onGateClick?.(gate.id);
+                }
+              }}
             >
               {/* Gate marker — outer ring */}
               {isHighlighted && (

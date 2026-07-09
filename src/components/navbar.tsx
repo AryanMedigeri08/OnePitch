@@ -25,6 +25,7 @@ export function Navbar() {
 
   return (
     <nav
+      aria-label="Main Navigation"
       className={`sticky top-0 z-50 border-b ${
         isCommand
           ? 'bg-brand-navy/95 border-brand-navy-mid text-white backdrop-blur-md'
@@ -36,16 +37,17 @@ export function Navbar() {
           {/* Logo */}
           <Link
             href={`/${locale}`}
+            aria-label="OnePitch Home"
             className="flex items-center gap-2 font-bold text-lg tracking-tight"
           >
-            <span className="text-xl">⚽</span>
+            <span className="text-xl" role="img" aria-label="soccer ball">⚽</span>
             <span className="bg-gradient-to-r from-brand-green to-brand-blue bg-clip-text text-transparent">
               {t('appName')}
             </span>
           </Link>
-
+ 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-1" role="menubar">
             {navLinks.slice(1).map((link) => {
               const isActive = pathname === link.href || 
                 (link.href !== `/${locale}` && pathname.startsWith(link.href));
@@ -53,6 +55,8 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  role="menuitem"
+                  aria-current={isActive ? 'page' : undefined}
                   className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
                     isActive
                       ? isCommand
@@ -68,31 +72,34 @@ export function Navbar() {
               );
             })}
           </div>
-
+ 
           {/* Right side */}
           <div className="flex items-center gap-2">
             <LanguageSwitcher isDark={isCommand} />
-
+ 
             {/* Mobile menu button */}
             <button
               className="md:hidden p-1.5 rounded-lg hover:bg-white/10"
               onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Toggle menu"
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-nav-menu"
             >
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
       </div>
-
+ 
       {/* Mobile Nav */}
       {mobileOpen && (
         <div
+          id="mobile-nav-menu"
           className={`md:hidden border-t animate-slide-up ${
             isCommand ? 'border-brand-navy-mid bg-brand-navy' : 'border-gray-200 bg-white'
           }`}
         >
-          <div className="px-4 py-3 space-y-1">
+          <div className="px-4 py-3 space-y-1" role="menu">
             {navLinks.slice(1).map((link) => {
               const isActive = pathname === link.href ||
                 (link.href !== `/${locale}` && pathname.startsWith(link.href));
@@ -100,6 +107,8 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  role="menuitem"
+                  aria-current={isActive ? 'page' : undefined}
                   onClick={() => setMobileOpen(false)}
                   className={`block px-3 py-2 rounded-lg text-sm font-medium ${
                     isActive

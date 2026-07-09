@@ -163,13 +163,17 @@ export function AgentChat({
       {/* Messages */}
       <div
         ref={scrollRef}
+        role="log"
+        aria-live="polite"
+        aria-relevant="additions text"
+        aria-busy={isLoading}
         className={`flex-1 overflow-y-auto p-4 space-y-4 min-h-[200px] max-h-[500px] ${
           isDark ? 'scrollbar-dark' : ''
         }`}
       >
         {messages.length === 0 && (
           <div className={`text-center py-8 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
-            <span className="text-3xl block mb-2">{agent.icon}</span>
+            <span className="text-3xl block mb-2" role="img" aria-label="agent icon">{agent.icon}</span>
             <p className="text-sm">{agent.tagline}</p>
             <p className="text-xs mt-1 opacity-60">Ask me anything</p>
           </div>
@@ -234,7 +238,7 @@ export function AgentChat({
 
         {/* Typing indicator */}
         {isLoading && (
-          <div className="flex gap-2.5">
+          <div className="flex gap-2.5" aria-hidden="true">
             <div
               className="w-7 h-7 rounded-full flex items-center justify-center text-xs"
               style={{ background: `${agent.color}20`, color: agent.color }}
@@ -255,7 +259,7 @@ export function AgentChat({
 
         {/* Error */}
         {error && (
-          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-red-500/10 text-red-400 text-sm">
+          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-red-500/10 text-red-400 text-sm" role="alert">
             <span>⚠️</span>
             <span>Something went wrong. Please try again.</span>
           </div>
@@ -265,6 +269,7 @@ export function AgentChat({
       {/* Input */}
       <form
         onSubmit={handleSubmit}
+        aria-label="Agent message input form"
         className={`flex items-center gap-2 px-3 py-2.5 border-t ${
           isDark ? 'border-brand-navy-mid' : 'border-gray-100'
         }`}
@@ -274,6 +279,7 @@ export function AgentChat({
           onChange={handleInputChange}
           placeholder={placeholder}
           disabled={isLoading}
+          aria-label="Message text"
           className={`flex-1 px-3 py-2 rounded-lg text-sm outline-none transition-colors ${
             isDark
               ? 'bg-brand-navy border border-brand-navy-mid text-white placeholder:text-gray-500 focus:border-brand-green/50'
@@ -283,6 +289,7 @@ export function AgentChat({
         <button
           type="submit"
           disabled={isLoading || !input.trim()}
+          aria-label="Send message"
           className={`p-2 rounded-lg transition-all ${
             isLoading || !input.trim()
               ? 'opacity-30 cursor-not-allowed'
